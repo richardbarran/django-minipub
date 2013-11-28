@@ -14,6 +14,13 @@ class ArticleAdmin(admin.ModelAdmin):
 			'fields': (('created', 'modified', 'status_changed'),)
 		})
 
+	SEO_FIELDSET = ('SEO', {
+			'description': "Meta elements provide information about the web page, "
+			"which can be used by search engines to help categorize the page correctly.",
+			'classes': ('collapse',),
+			'fields': ('meta_description', 'meta_keywords', 'sitemap_priority')
+	})
+
 	fieldsets = (
 		(None, {
 			'fields': ('title', 'slug',)
@@ -30,12 +37,7 @@ class ArticleAdmin(admin.ModelAdmin):
 		(None, {
 			'fields': ('body',)
 		}),
-		('SEO', {
-			'description': "Meta elements provide information about the web page, "
-			"which can be used by search engines to help categorize the page correctly.",
-			'classes': ('collapse',),
-			'fields': ('meta_description', 'meta_keywords', 'sitemap_priority')
-		}),
+		SEO_FIELDSET,
 		TIMESTAMP_FIELDSET
 	)
 
