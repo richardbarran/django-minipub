@@ -1,0 +1,103 @@
+from django.db import models
+from django.core.urlresolvers import reverse
+from django.core.exceptions import ValidationError
+
+from model_utils.models import StatusModel, TimeStampedModel
+from model_utils import Choices
+from model_utils.managers import PassThroughManager
+
+import datetime
+import decimal
+
+from .managers import ArticleQuerySet
+
+def validate_priority(value):
+    if value < decimal.Decimal('0') or value > decimal.Decimal('1.0'):
+        raise ValidationError(u'Please enter a number between 0 and 1')
+
+class AbstractArticle(StatusModel, TimeStampedModel):
+    """
+
+    'Viewable'
+    ----------
+    All articles have the following 3 fields:
+    - status: 'draft' or 'published'.
+    - start: start date, defaults to time of publication.
+    - end: end date; optional.
+    
+    Articles can only be viewed in the front end if they are 'published'
+    and between the start and end dates.
+    
+    ``viewable()`` methods are available both as chainable filters on a queryset,
+    and as instance methods.
+
+    """
+
+    STATUS = Choices('draft', 'published')
+
+    title = models.CharField(unique=True, max_length=50)
+    slug = models.SlugField()
+    # NB: start is a required field, as it is used for sorting the articles in
+    # the archive views.
+    start = models.DateField('start date',
+                             null=True, blank=True,
+                             help_text='Publication date of the article. It will not be visible before this date.')
+    end = models.DateField('end date',
+                             null=True, blank=True,
+                             help_text='End of publication date of the article. It will not be visible after this date.')
+    body = models.TextField()
+
+    # SEO fields.
+    meta_description = models.CharField(max_length=155,
+                                        null=True, blank=True,
+                                     help_text='<a href="http://en.wikipedia.org/wiki/Meta_element#The_description_attribute" target="_blank">See here for information.</a>')
+    meta_keywords = models.CharField(max_length=255,
+                                     null=True, blank=True,
+                                     help_text='<a href="http://en.wikipedia.org/wiki/Meta_element#The_keywords_attribute" target="_blank">See here for information.</a>')
+    sitemap_priority = models.DecimalField('Priority',
+                                           # Don't need 3 digits, but easy way to
+                                           # make the validation message a bit cleaner.
+                                           max_digits=3,
+                                           decimal_places=1,
+                                           default=0.5,
+                                           validators=[validate_priority],
+                                           help_text='Set in the search engine sitemap '
+        'the priority of this page relative to other pages in the same site. Use a '
+        'value between 0 and 1 - 0.5 is the default.')
+
+    def __unicode__(self):
+        return self.title
+
+    objects = PassThroughManager.for_queryset_class(ArticleQuerySet)()
+
+    class Meta:
+        abstract = True
+
+    def get_absolute_url(self):
+        return reverse('article_detail', kwargs={'slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        """Set the publication date for published items if it hasn't been set already."""
+        if self.status == self.STATUS.published and self.start is None:
+            self.start = datetime.date.today()
+        super(AbstractArticle, self).save(*args, **kwargs)
+
+    def clean(self):
+        if self.start and self.end and self.start > self.end:
+            raise ValidationError('The end date cannot be before the start date.')
+
+    def viewable(self):
+        """Can this article be viewed?"""
+        if not self.status == self.STATUS.published:
+            return False
+        if self.start and self.start > datetime.date.today():
+            return False
+        if self.end and self.end < datetime.date.today():
+            return False
+        return True
+    viewable.boolean = True
+
+class Article(AbstractArticle):
+    pass
+
+

@@ -1,0 +1,50 @@
+Django-mininews
+===============
+
+A toolkit that provides boilerplate code used in creating apps for Articles, Blogs, etc...
+
+Why?
+----
+The author has written several Blog/News type applications for clients; after a 
+while he noticed that:
+- Most blog engines for Django are feature-rich - see Zinnia for example.
+- Most of the websites built only need a subset of those features.
+- For each site, the client needs differ slightly - for
+  example, specifying which WYSIWYG editor to use; or adding tagging; or using
+  expiry dates.
+- Several of the blog/news applications on Pypi look like abandonware; probably
+  because they were just too complex for their author to keep on maintaining...
+- Clients are (understandably) curious about features that exist in a third-party
+  app, appear in the admin interface of their website, but are not actually used
+  (and the same questions get raised each time a new
+  intern takes over managing the client's blog page).
+
+The answer to the above was to create a toolkit that included a very limited
+feature set, but that was *very* easy to customise. In fact, django-mininews by
+default does not ship with a urls.py - the intent is that you will *never* use
+it 'out of the box', but rather as a starting point for your own application.
+
+So, what does it do?
+--------------------
+Basically, it provides an abstract model with:
+
+- a title and slug. Boring.
+- publication fields: status, start date, and end date.
+- SEO fields (meta + sitemap priority).
+- a set of timestamps to monitor each record (timestamp created, last modified,
+  last change of status).
+- Erm, that's it.
+
+The above fields are then used in plenty of boilerplate code for the admin, views,
+sitemaps, Atom feeds (still to do), a fixture generator for unit tests, and 
+so on.
+
+Use of factory-boy
+------------------
+
+The unit tests use factory-boy extensively to generate test data. One reason for using
+it is that because the models will often be extended, we have no
+way of knowing exactly what required fields might exist on the model - and our
+tests would fail. Factory-boy will automatically fill in some dummy values.
+
+Inspired by http://slid.es/kevinastone/django-model-behaviors

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }}{% endblock title %}
+{% block meta_keywords %}{{ article.meta_keywords }}{% endblock %}
+{% block meta_description %}{{ article.meta_description }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="span12">
+            <h1>{{ article.title }}</h1>
+            <em>{{ article.start }}</em>
+            <div>{{ article.body|safe|linebreaksbr }}</div>
+        </div>
+    </div>
+            
+{% endblock content %}
+
+

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}SAPHRA news{% endblock title %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>SAPHRA news</h1>
+        </div>
+    </div>
+            
+    <div class="row">
+    
+           <div class="col-md-9">
+               <h3>
+               {% block minutes_list_title %}Articles{% endblock %}
+               </h3>
+               <ul>
+				    {% for item in article_list %}
+		               <li>
+			              <a href="{{ item.get_absolute_url }}">
+			                  {{ item.title }}
+			              </a>
+			           </li>
+				    {% endfor %}
+               </ul>
+               
+               {% if is_paginated %}
+                {% bootstrap_pagination page_obj %}
+                Showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} results. 
+               {% endif %} 
+               
+           </div>
+           
+           <div class="col-md-3">
+                <h3>Filter articles by year</h3>
+                <ul>
+                    {% for item in date_list %}
+                        {% with year_number=item.year %}
+                            {% if year and year.year == year_number %}
+                                <li>{{ year_number }}</li>
+                            {% else %}
+                                <li><a href="{% url 'article_year' year_number %}">{{ year_number }}</a></li>
+                            {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </ul>
+           </div>
+    </div>
+
+{% endblock content %}
+
+
