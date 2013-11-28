@@ -9,7 +9,7 @@
     <div class="row">
         <div class="span12">
             <h1>{{ article.title }}</h1>
-            <em>{{ article.start }}</em>
+            <em>{{ article.start|default:"No start date" }}</em>
             <div>{{ article.body|safe|linebreaksbr }}</div>
         </div>
     </div>

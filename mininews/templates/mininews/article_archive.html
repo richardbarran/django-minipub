@@ -2,22 +2,20 @@
 
 {% load bootstrap3 %}
 
-{% block title %}SAPHRA news{% endblock title %}
+{% block title %}News{% endblock title %}
 
 {% block content %}
 
     <div class="row">
         <div class="col-md-12">
-            <h1>SAPHRA news</h1>
+            <h1>News</h1>
         </div>
     </div>
             
     <div class="row">
     
            <div class="col-md-9">
-               <h3>
-               {% block minutes_list_title %}Articles{% endblock %}
-               </h3>
+               <p>Here is a list of articles</p>
                <ul>
 				    {% for item in article_list %}
 		               <li>
