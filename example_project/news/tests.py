@@ -210,11 +210,6 @@ class ArticleListYearTest(TestCase):
         self.assertQuerysetEqual(response.context['article_list'],
                                  ['<Article: article 3>'])
 
-        # The list of the years still shows all the years in which we have minutes.
-        self.assertEqual(list(response.context['date_list']),
-                          [datetime.date(2012, 1, 1),
-                           datetime.date(2011, 1, 1)])
-
     def test_year_not_viewable(self):
         """Minutes that are not viewable do not appear in the year page.
         By extension, a year with no viewable minutes gives a 404"""

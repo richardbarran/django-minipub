@@ -1,23 +1,33 @@
 {% extends "news/root.html" %}
 
+{% load news_tags %}
+
 {% block title %}{{ post.title }}{% endblock title %}
 {% block meta_keywords %}{{ post.meta_keywords }}{% endblock %}
 {% block meta_description %}{{ post.meta_description }}{% endblock %}
 
 {% block content %}
 
+
     <div class="row">
-        <div class="span12">
+        <div class="col-md-12">
             <h1>{{ post.title }}</h1>
-            <em>{{ post.start|default:"No start date set" }}</em>
-            <div>{{ post.body|safe|linebreaksbr }}</div>
         </div>
     </div>
-            
+
     <div class="row">
-        <div class="span12">
+
+        <div class="col-md-9">
+            <em>{{ post.start|default:"No start date set" }}</em>
+            <div>{{ post.body|safe|linebreaksbr }}</div>
             <a href="/news/">Return to list of all articles</a>
         </div>
+
+	    <div class="col-md-3">
+	         <h3>Filter articles by year</h3>
+	         {% article_year_list %}
+	    </div>
+
     </div>
 
 {% endblock content %}

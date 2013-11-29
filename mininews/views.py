@@ -23,14 +23,6 @@ class ArticleYearArchiveView(YearArchiveView):
     def get_queryset(self):
         return self.model.objects.viewable()
 
-    def get_context_data(self, **kwargs):
-        context = super(ArticleYearArchiveView, self).get_context_data(**kwargs)
-        dates_qs = self.get_queryset()
-        context['date_list'] = self.get_date_list(dates_qs,
-                                                  date_type='year',
-                                                  ordering='DESC')
-        return context
-
 class ArticleDetailView(DetailView):
     model = None
 

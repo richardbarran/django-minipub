@@ -1,0 +1,11 @@
+<ul>
+    {% for item in date_list %}
+        {% with year_number=item.year %}
+            {% if year and year.year == year_number %}
+                <li>{{ year_number }}</li>
+            {% else %}
+                <li><a href="{% url 'article_year' year_number %}">{{ year_number }}</a></li>
+            {% endif %}
+        {% endwith %}
+    {% endfor %}
+</ul>
