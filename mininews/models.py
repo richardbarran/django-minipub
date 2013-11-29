@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 
 from model_utils.models import StatusModel, TimeStampedModel
@@ -11,7 +10,7 @@ import decimal
 
 from .managers import ArticleQuerySet
 
-class AbstractArticle(StatusModel, TimeStampedModel):
+class AbstractArticleModel(StatusModel, TimeStampedModel):
     """
 
     'Viewable'
@@ -31,8 +30,6 @@ class AbstractArticle(StatusModel, TimeStampedModel):
 
     STATUS = Choices('draft', 'published')
 
-    title = models.CharField(unique=True, max_length=50)
-    slug = models.SlugField()
     # NB: start is a required field, as it is used for sorting the articles in
     # the archive views.
     start = models.DateField('start date',
@@ -41,24 +38,17 @@ class AbstractArticle(StatusModel, TimeStampedModel):
     end = models.DateField('end date',
                              null=True, blank=True,
                              help_text='End of publication date of the article. It will not be visible after this date.')
-    body = models.TextField()
-
-    def __unicode__(self):
-        return self.title
 
     objects = PassThroughManager.for_queryset_class(ArticleQuerySet)()
 
     class Meta:
         abstract = True
 
-    def get_absolute_url(self):
-        return reverse('article_detail', kwargs={'slug': self.slug})
-
     def save(self, *args, **kwargs):
         """Set the publication date for published items if it hasn't been set already."""
         if self.status == self.STATUS.published and self.start is None:
             self.start = datetime.date.today()
-        super(AbstractArticle, self).save(*args, **kwargs)
+        super(AbstractArticleModel, self).save(*args, **kwargs)
 
     def clean(self):
         if self.start and self.end and self.start > self.end:
@@ -106,7 +96,7 @@ class SEOModel(models.Model):
         abstract = True
 
 
-class Article(AbstractArticle, SEOModel):
-    pass
+
+
 
 

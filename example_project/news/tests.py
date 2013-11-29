@@ -3,11 +3,21 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.test.utils import override_settings
 
-from mininews.factories import ArticleFactory
-from mininews.models import Article
+from .factories import ArticleFactory
+from .models import Article
 
 import datetime
 import decimal
+
+"""
+Welcome... here are all the tests for the mininews application.
+
+mininews models are all abstract, and no urls.py is defined by default, so testing
+is a bit tricky. So instead we test this news app which implements all the 
+mininews functionality.
+
+"""
+
 
 class ArticleModelTest(TestCase):
     """Various tests on the Article model."""
@@ -85,9 +95,9 @@ class ArticleListTest(TestCase):
     def test_get(self):
         """Get main page of the app - should contain a list of the latest minutes."""
 
-        response = self.client.get('/mininews/')
+        response = self.client.get('/news/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'mininews/article_archive.html')
+        self.assertTemplateUsed(response, 'news/article_archive.html')
 
         self.assertQuerysetEqual(response.context['article_list'],
                                  ['<Article: article 3>', '<Article: article 2>', '<Article: article 1>'])
@@ -97,7 +107,7 @@ class ArticleListTest(TestCase):
         # etc...
 
         # And we have the urls to the detail page.
-        self.assertContains(response, '/mininews/')
+        self.assertContains(response, '/news/')
 
     def test_not_published(self):
         """Minutes that are not published are not shown."""
@@ -105,7 +115,7 @@ class ArticleListTest(TestCase):
         self.article1.status = Article.STATUS.draft
         self.article1.save()
 
-        response = self.client.get('/mininews/')
+        response = self.client.get('/news/')
         self.assertEqual(response.status_code, 200)
 
         self.assertQuerysetEqual(response.context['article_list'],
@@ -117,7 +127,7 @@ class ArticleListTest(TestCase):
             ArticleFactory(title='article{0:0>3}'.format(i),
                            start=datetime.date(day=i, month=12, year=2011))
 
-        response = self.client.get('/mininews/')
+        response = self.client.get('/news/')
 
         self.assertEqual(len(response.context['article_list']),
                          20)
@@ -128,7 +138,7 @@ class ArticleListTest(TestCase):
                                  'article003')
 
         # Now get the second page of results.
-        response = self.client.get('/mininews/', {'page': 2})
+        response = self.client.get('/news/', {'page': 2})
 
         self.assertEqual(len(response.context['article_list']),
                          2)
@@ -154,7 +164,7 @@ class ArticleListYearTest(TestCase):
     def test_get(self):
         """Check that we have the years."""
 
-        response = self.client.get('/mininews/')
+        response = self.client.get('/news/')
 
         self.assertEqual(list(response.context['date_list']),
                           [datetime.date(2012, 1, 1),
@@ -170,7 +180,7 @@ class ArticleListYearTest(TestCase):
         self.article3.status = Article.STATUS.draft
         self.article3.save()
 
-        response = self.client.get('/mininews/')
+        response = self.client.get('/news/')
 
         self.assertEqual(list(response.context['date_list']),
                           [datetime.date(2011, 1, 1)])
@@ -179,7 +189,7 @@ class ArticleListYearTest(TestCase):
     def test_get_year_page(self):
         """We can request the minutes for a given year."""
 
-        response = self.client.get('/mininews/year/2012/')
+        response = self.client.get('/news/year/2012/')
 
         # Only that year's minutes are available.
         self.assertQuerysetEqual(response.context['article_list'],
@@ -197,7 +207,7 @@ class ArticleListYearTest(TestCase):
         self.article3.status = Article.STATUS.draft
         self.article3.save()
 
-        response = self.client.get('/mininews/year/2012/')
+        response = self.client.get('/news/year/2012/')
         self.assertEqual(response.status_code, 404)
 
 class ArticleDetailTest(TestCase):
@@ -208,13 +218,13 @@ class ArticleDetailTest(TestCase):
 
     def test_get(self):
         """Get an article detail page."""
-        response = self.client.get('/mininews/some-news-about-me/')
+        response = self.client.get('/news/some-news-about-me/')
         self.assertEqual(response.status_code, 200)
 
-        self.assertTemplateUsed(response, 'mininews/article_detail.html')
+        self.assertTemplateUsed(response, 'news/article_detail.html')
 
         # Check that various fields of the article are there.
-        self.assertEqual(response.context['article'], self.article1)
+        self.assertEqual(response.context['post'], self.article1)
         self.assertContains(response, self.article1.title)
 
     def test_published(self):
@@ -223,7 +233,7 @@ class ArticleDetailTest(TestCase):
         self.article1.status = Article.STATUS.draft
         self.article1.save()
 
-        response = self.client.get('/mininews/some-news-about-me/')
+        response = self.client.get('/news/some-news-about-me/')
         self.assertEqual(response.status_code, 404)
 
     def test_published_staff(self):
@@ -239,7 +249,7 @@ class ArticleDetailTest(TestCase):
         user.save()
         self.assertTrue(self.client.login(username='john.doe', password='secret'))
 
-        response = self.client.get('/mininews/some-news-about-me/')
+        response = self.client.get('/news/some-news-about-me/')
         self.assertEqual(response.status_code, 200)
 
 class SitemapTest(TestCase):
@@ -254,7 +264,7 @@ class SitemapTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Has the url.
-        self.assertContains(response, '<loc>http://example.com/mininews/test-article/</loc>')
+        self.assertContains(response, '<loc>http://example.com/news/test-article/</loc>')
 
         # Has the modified date - which will always be today.
         today_as_string = datetime.date.today().today().strftime('%Y-%m-%d')

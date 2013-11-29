@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'mininews',
     'bootstrap3',
+    'news',
 )
 
 MIDDLEWARE_CLASSES = (

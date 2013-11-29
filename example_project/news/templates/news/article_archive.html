@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "news/root.html" %}
 
 {% load bootstrap3 %}
 
-{% block title %}News{% endblock title %}
+{% block title %}Blog{% endblock title %}
 
 {% block content %}
 
@@ -34,7 +34,7 @@
            </div>
            
            <div class="col-md-3">
-                <h3>Filter articles by year</h3>
+                <h3>Filter posts by year</h3>
                 <ul>
                     {% for item in date_list %}
                         {% with year_number=item.year %}

@@ -1,0 +1,25 @@
+{% extends "news/root.html" %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+{% block meta_keywords %}{{ post.meta_keywords }}{% endblock %}
+{% block meta_description %}{{ post.meta_description }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="span12">
+            <h1>{{ post.title }}</h1>
+            <em>{{ post.start|default:"No start date set" }}</em>
+            <div>{{ post.body|safe|linebreaksbr }}</div>
+        </div>
+    </div>
+            
+    <div class="row">
+        <div class="span12">
+            <a href="/news/">Return to list of all articles</a>
+        </div>
+    </div>
+
+{% endblock content %}
+
+

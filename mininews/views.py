@@ -1,21 +1,17 @@
 from django.views.generic.dates import ArchiveIndexView, YearArchiveView
 from django.views.generic import DetailView
-from django.shortcuts import get_object_or_404
 from django.http import Http404
 
-from .models import Article
-
 class ArticleArchiveView(ArchiveIndexView):
-    model = Article
+    model = None
     date_field = 'start'
     paginate_by = 20
-    context_object_name = 'article_list'
 
     def get_queryset(self):
         return self.model.objects.viewable()
 
 class ArticleYearArchiveView(YearArchiveView):
-    model = Article
+    model = None
     date_field = 'start'
     paginate_by = 20
     make_object_list = True
@@ -32,8 +28,7 @@ class ArticleYearArchiveView(YearArchiveView):
         return context
 
 class ArticleDetailView(DetailView):
-    model = Article
-    context_object_name = 'article'
+    model = None
 
     def _allowed(self, article):
         """Factor out a bit of boilerplate."""
@@ -43,13 +38,4 @@ class ArticleDetailView(DetailView):
             raise Http404
         return article
 
-    def get_object(self):
-        article = get_object_or_404(self.model, slug=self.kwargs['slug'])
-        return self._allowed(article)
-
-    def get_context_data(self, **kwargs):
-        context = super(ArticleDetailView, self).get_context_data(**kwargs)
-        dates_qs = self.model.objects.viewable()
-        context['date_list'] = dates_qs.dates('start', 'year')[::-1]
-        return context
 
