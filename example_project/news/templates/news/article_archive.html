@@ -8,14 +8,16 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1>News</h1>
+			{% block page_title %}
+			     <h1>News</h1>
+			{% endblock %}
         </div>
     </div>
             
     <div class="row">
     
            <div class="col-md-9">
-               <p>Here is a list of articles</p>
+               <p>Here is a list of articles.</p>
                <ul>
 				    {% for item in article_list %}
 		               <li>
