@@ -7,6 +7,7 @@ Why?
 ----
 The author has written several Blog/News type applications for clients; after a 
 while he noticed that:
+
 - Most blog engines for Django are feature-rich - see Zinnia for example.
 - Most of the websites built only need a subset of those features.
 - For each site, the client needs differ slightly - for
