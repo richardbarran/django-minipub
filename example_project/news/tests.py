@@ -93,7 +93,7 @@ class ArticleListTest(TestCase):
                                        start=datetime.date(day=24, month=12, year=2012))
 
     def test_get(self):
-        """Get main page of the app - should contain a list of the latest minutes."""
+        """Get main page of the app - should contain a list of the latest articles."""
 
         response = self.client.get('/news/')
         self.assertEqual(response.status_code, 200)
@@ -111,7 +111,7 @@ class ArticleListTest(TestCase):
         self.assertContains(response, '/news/')
 
     def test_not_published(self):
-        """Minutes that are not published are not shown."""
+        """Articles that are not published are not shown."""
 
         self.article1.status = Article.STATUS.draft
         self.article1.save()
@@ -203,17 +203,17 @@ class ArticleListYearTest(TestCase):
 
 
     def test_get_year_page(self):
-        """We can request the minutes for a given year."""
+        """We can request the articles for a given year."""
 
         response = self.client.get('/news/year/2012/')
 
-        # Only that year's minutes are available.
+        # Only that year's articles are available.
         self.assertQuerysetEqual(response.context['article_list'],
                                  ['<Article: article 3>'])
 
     def test_year_not_viewable(self):
-        """Minutes that are not viewable do not appear in the year page.
-        By extension, a year with no viewable minutes gives a 404"""
+        """Articles that are not viewable do not appear in the year page.
+        By extension, a year with no viewable articles gives a 404"""
 
         self.article3.status = Article.STATUS.draft
         self.article3.save()
@@ -235,7 +235,7 @@ class ArticleDetailTest(TestCase):
         self.assertTemplateUsed(response, 'news/article_detail.html')
 
         # Check that various fields of the article are there.
-        self.assertEqual(response.context['post'], self.article1)
+        self.assertEqual(response.context['article'], self.article1)
         self.assertContains(response, self.article1.title)
 
     def test_published(self):

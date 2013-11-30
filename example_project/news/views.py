@@ -15,7 +15,7 @@ class ArticleYearArchiveView(ArticleYearArchiveView):
 
 class ArticleDetailView(ArticleDetailView):
     model = Article
-    context_object_name = 'post'
+    context_object_name = 'article'
 
     def get_object(self):
         article = get_object_or_404(self.model, slug=self.kwargs['slug'])

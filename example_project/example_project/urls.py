@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 
-from news.sitemaps import BlogSitemap
+from news.sitemaps import NewsSitemap
 
 admin.autodiscover()
 
@@ -15,5 +15,5 @@ urlpatterns = patterns('',
 urlpatterns += patterns(
     '',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
-        {'sitemaps': {'news': BlogSitemap}}),
+        {'sitemaps': {'news': NewsSitemap}}),
 )
