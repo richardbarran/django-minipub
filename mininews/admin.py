@@ -4,6 +4,7 @@ class ArticleAdmin(admin.ModelAdmin):
     """Just some boilerplate code that is useful in child classes."""
 
     readonly_fields = ('created', 'modified', 'status_changed')
+    ordering = ['-start']
 
     TIMESTAMP_FIELDSET = ('Timestamps', {
             'description': 'When this record was created, last modified, and when '

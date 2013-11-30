@@ -88,7 +88,7 @@ class ArticleListTest(TestCase):
         self.article1 = ArticleFactory(title='article 1',
                                        start=datetime.date(day=23, month=12, year=2011))
         self.article2 = ArticleFactory(title='article 2',
-                                       start=datetime.date(day=24, month=12, year=2011))
+                                       start=datetime.date(day=25, month=12, year=2012))
         self.article3 = ArticleFactory(title='article 3',
                                        start=datetime.date(day=24, month=12, year=2012))
 
@@ -99,8 +99,9 @@ class ArticleListTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'news/article_archive.html')
 
+        # Note that results are ordered by date.
         self.assertQuerysetEqual(response.context['article_list'],
-                                 ['<Article: article 3>', '<Article: article 2>', '<Article: article 1>'])
+                                 ['<Article: article 2>', '<Article: article 3>', '<Article: article 1>'])
 
         self.assertContains(response, 'article 1')
         self.assertContains(response, 'article 2')
@@ -119,7 +120,7 @@ class ArticleListTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertQuerysetEqual(response.context['article_list'],
-                                 ['<Article: article 3>', '<Article: article 2>'])
+                                 ['<Article: article 2>', '<Article: article 3>'])
 
     def test_nothing(self):
         """Still show the page even if no articles are available."""
