@@ -19,14 +19,14 @@
 
         <div class="col-md-9">
             <em>{{ post.start|default:"No start date set" }}</em>
-            <div>{{ post.body|safe|linebreaksbr }}</div>
+            <article>{{ post.body|safe|linebreaksbr }}</article>
             <a href="/news/">Return to list of all articles</a>
         </div>
 
-	    <div class="col-md-3">
+	    <aside class="col-md-3">
 	         <h3>Filter articles by year</h3>
 	         {% article_year_list %}
-	    </div>
+	    </aside>
 
     </div>
 
