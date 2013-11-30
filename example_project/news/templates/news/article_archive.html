@@ -1,6 +1,6 @@
 {% extends "news/root.html" %}
 
-{% load bootstrap3 news_tags %}
+{% load news_tags %}
 
 {% block title %}Blog{% endblock title %}
 
@@ -21,11 +21,6 @@
 			           </li>
 				    {% endfor %}
                </ul>
-               
-               {% if is_paginated %}
-                {% bootstrap_pagination page_obj %}
-                Showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} results. 
-               {% endif %} 
                
            </main>
            
