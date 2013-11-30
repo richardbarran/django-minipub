@@ -12,9 +12,6 @@ def article_year_list(context):
     It relies on a variable 'year' being in the context, and being a date (or datetime)
     instance representing the current year on the target page.
     """
-
-    dates_qs = Article.objects.viewable()
-    date_list = dates_qs.dates('start', 'year')[::-1]
-    context.update({'date_list': date_list})
+    context.update({'date_list': Article.objects.date_list()})
     return context
 
