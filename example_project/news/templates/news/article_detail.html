@@ -6,20 +6,15 @@
 {% block meta_keywords %}{{ post.meta_keywords }}{% endblock %}
 {% block meta_description %}{{ post.meta_description }}{% endblock %}
 
+{% block page_title %}{{ post.title }}{% endblock %}
+
 {% block content %}
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <h1>{{ post.title }}</h1>
-        </div>
-    </div>
 
     <div class="row">
 
         <div class="col-md-9">
             <em>{{ post.start|default:"No start date set" }}</em>
-            <article>{{ post.body|safe|linebreaksbr }}</article>
+            <article class="blog_post">{{ post.body|safe|linebreaksbr }}</article>
             <a href="/news/">Return to list of all articles</a>
         </div>
 

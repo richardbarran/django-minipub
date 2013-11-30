@@ -1,20 +1,5 @@
 /*! project specific CSS goes here. */
 
-/* Some classes that are made available in CKeditor */
-
-.left{
-    float: left;
-    margin-right: 27px;
-    margin-bottom: 18px;
-}
-
-.right{
-    float:right;
-    margin-left: 27px;
-    margin-bottom: 18px;
-}
-
-.center {
-    display: table;
-    margin: 0 auto;
+article.blog_post {
+	margin: 20px 0;
 }

@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <title>{% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+	    <meta name="description" content="{% block meta_description %}{% endblock %}">
 		<!-- Bootstrap -->
 		<link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="{{ STATIC_URL }}css/screen.css" rel="stylesheet" media="screen">
@@ -36,6 +38,11 @@
 		  </div><!-- /.navbar-collapse -->
 		</nav>
     	<div class="container">
+		    <div class="row">
+		        <div class="col-md-12">
+		            <h1 class="page-header">{% block page_title %}{% endblock %}</h1>
+		        </div>
+		    </div>
         	{% block content %}{% endblock %}
         </div>
         <script src="{{ STATIC_URL }}js/jquery.js"></script>
