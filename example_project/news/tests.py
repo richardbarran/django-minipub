@@ -16,6 +16,15 @@ mininews models are all abstract, and no urls.py is defined by default, so testi
 is a bit tricky. So instead we test this news app which implements all the 
 mininews functionality.
 
+Use of factory-boy
+------------------
+
+The unit tests use factory-boy extensively to generate test data. One reason for using
+it is that because the models will often be extended, we have no
+way of knowing exactly what required fields might exist on the model - and our
+tests would fail. Factory-boy will automatically fill in some dummy values - and can
+be inherited easily if you're writing an app that extends this one.
+
 """
 
 

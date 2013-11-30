@@ -29,23 +29,13 @@ So, what does it do?
 --------------------
 Basically, it provides an abstract model with:
 
-- a title and slug. Boring.
-- publication fields: status, start date, and end date.
+- Publication fields: status, start date, and end date.
 - SEO fields (meta + sitemap priority).
-- a set of timestamps to monitor each record (timestamp created, last modified,
+- A set of timestamps to monitor each record (timestamp created, last modified,
   last change of status).
 - Erm, that's it.
 
 The above fields are then used in plenty of boilerplate code for the admin, views,
-sitemaps, Atom feeds (still to do), a fixture generator for unit tests, and 
-so on.
+sitemaps, Atom feeds (still to do),  and so on.
 
-Use of factory-boy
-------------------
 
-The unit tests use factory-boy extensively to generate test data. One reason for using
-it is that because the models will often be extended, we have no
-way of knowing exactly what required fields might exist on the model - and our
-tests would fail. Factory-boy will automatically fill in some dummy values.
-
-Inspired by http://slid.es/kevinastone/django-model-behaviors
