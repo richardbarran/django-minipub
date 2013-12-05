@@ -32,12 +32,8 @@ class AbstractArticleModel(StatusModel, TimeStampedModel):
 
     # NB: start is a required field, as it is used for sorting the articles in
     # the archive views.
-    start = models.DateField('start date',
-                             null=True, blank=True,
-                             help_text='Publication date of the article. It will not be visible before this date.')
-    end = models.DateField('end date',
-                             null=True, blank=True,
-                             help_text='End of publication date of the article. It will not be visible after this date.')
+    start = models.DateField('start date', null=True, blank=True)
+    end = models.DateField('end date', null=True, blank=True)
 
     objects = PassThroughManager.for_queryset_class(ArticleQuerySet)()
 
