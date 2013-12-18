@@ -36,6 +36,10 @@ Basically, it provides an abstract model with:
 - Erm, that's it.
 
 The above fields are then used in plenty of boilerplate code for the admin, views,
-sitemaps, Atom feeds (still to do),  and so on.
+sitemaps, and so on.
 
-
+TODO:
+- Atom feeds.
+- The list view shows the latest articles/posts... add alongside this the ListView
+  so that devs can add custom ordering (and not be forced to use 'date, descending').
+- Add OpenGraph template snippet (article tags)
