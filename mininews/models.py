@@ -10,13 +10,15 @@ import decimal
 
 from .managers import ArticleQuerySet
 
+
 class AbstractArticleModel(StatusModel, TimeStampedModel):
+
     """
 
     'Viewable'
     ----------
     All articles have the following 3 fields:
-    - status: 'draft' or 'published'.
+    - status: usually 'draft' or 'published'.
     - start: start date, defaults to time of publication.
     - end: end date; optional.
     
@@ -25,6 +27,17 @@ class AbstractArticleModel(StatusModel, TimeStampedModel):
     
     ``viewable()`` methods are available both as chainable filters on a queryset,
     and as instance methods.
+
+    ``viewable()`` take one optional argument: ``statuses``. This is for when you change
+    the status list; for example, if you define::
+
+        STATUS = Choices('draft', 'published', 'archived')    
+
+    Then the notion of ``viewable`` will depend if you are in the section of the site that
+    shows the ``published`` articles, or in the section that shows the ``archived`` articles.
+
+    So you can specify what makes an article ``viewable``; the default is ``published``.
+
 
     """
 
@@ -50,9 +63,9 @@ class AbstractArticleModel(StatusModel, TimeStampedModel):
         if self.start and self.end and self.start > self.end:
             raise ValidationError('The end date cannot be before the start date.')
 
-    def viewable(self):
+    def viewable(self, statuses=['published']):
         """Can this article be viewed?"""
-        if not self.status == self.STATUS.published:
+        if not self.status in statuses:
             return False
         if self.start and self.start > datetime.date.today():
             return False
@@ -61,11 +74,14 @@ class AbstractArticleModel(StatusModel, TimeStampedModel):
         return True
     viewable.boolean = True
 
+
 def validate_priority(value):
     if value < decimal.Decimal('0') or value > decimal.Decimal('1.0'):
         raise ValidationError(u'Please enter a number between 0 and 1')
 
+
 class SEOModel(models.Model):
+
     """SEO fields are split out into their own mixin; the reasoning is that
     on multilingual sites we might want to i18n the meta fields, and so not
     include this mixin."""
@@ -73,7 +89,7 @@ class SEOModel(models.Model):
     # SEO fields.
     meta_description = models.CharField(max_length=155,
                                         null=True, blank=True,
-                                     help_text='<a href="http://en.wikipedia.org/wiki/Meta_element#The_description_attribute" target="_blank">See here for information.</a>')
+                                        help_text='<a href="http://en.wikipedia.org/wiki/Meta_element#The_description_attribute" target="_blank">See here for information.</a>')
     meta_keywords = models.CharField(max_length=255,
                                      null=True, blank=True,
                                      help_text='<a href="http://en.wikipedia.org/wiki/Meta_element#The_keywords_attribute" target="_blank">See here for information.</a>')
@@ -85,14 +101,8 @@ class SEOModel(models.Model):
                                            default=0.5,
                                            validators=[validate_priority],
                                            help_text='Set in the search engine sitemap '
-        'the priority of this page relative to other pages in the same site. Use a '
-        'value between 0 and 1 - 0.5 is the default.')
+                                           'the priority of this page relative to other pages in the same site. Use a '
+                                           'value between 0 and 1 - 0.5 is the default.')
 
     class Meta:
         abstract = True
-
-
-
-
-
-

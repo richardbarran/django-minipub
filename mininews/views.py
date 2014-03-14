@@ -2,6 +2,7 @@ from django.views.generic.dates import ArchiveIndexView, YearArchiveView
 from django.views.generic import DetailView
 from django.http import Http404
 
+
 class ArticleArchiveView(ArchiveIndexView):
     model = None
     date_field = 'start'
@@ -14,6 +15,7 @@ class ArticleArchiveView(ArchiveIndexView):
     def get_queryset(self):
         return self.model.objects.viewable()
 
+
 class ArticleYearArchiveView(YearArchiveView):
     model = None
     date_field = 'start'
@@ -23,15 +25,14 @@ class ArticleYearArchiveView(YearArchiveView):
     def get_queryset(self):
         return self.model.objects.viewable()
 
+
 class ArticleDetailView(DetailView):
     model = None
 
-    def _allowed(self, article):
+    def _allowed(self, article, statuses=None):
         """Factor out a bit of boilerplate."""
         if self.request.user.is_authenticated() and self.request.user.is_staff:
             return article
-        if not article.viewable():
+        if not article.viewable(statuses):
             raise Http404
         return article
-
-
