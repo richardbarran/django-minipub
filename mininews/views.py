@@ -33,6 +33,10 @@ class ArticleDetailView(DetailView):
         """Factor out a bit of boilerplate."""
         if self.request.user.is_authenticated() and self.request.user.is_staff:
             return article
-        if not article.viewable(statuses):
-            raise Http404
+        if statuses:
+            if not article.viewable(statuses):
+                raise Http404
+        else:
+            if not article.viewable():
+                raise Http404
         return article
