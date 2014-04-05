@@ -9,6 +9,7 @@ setup(
     long_description=open('README.rst').read(),
     install_requires=[
         'django-model-utils',
+	'factory-boy',
     ],
     url='https://github.com/richardbarran/django-mininews',
     author='Richard Barran',
