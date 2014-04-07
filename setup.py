@@ -8,8 +8,8 @@ setup(
     description='Boilerplate for creating publishable lists of objects',
     long_description=open('README.rst').read(),
     install_requires=[
-        'django-model-utils',
-	'factory-boy',
+        'django-model-utils==2.0.3',
+	'factory-boy==2.3.1',
     ],
     url='https://github.com/richardbarran/django-mininews',
     author='Richard Barran',
