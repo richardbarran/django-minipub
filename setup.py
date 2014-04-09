@@ -7,11 +7,15 @@ setup(
     license='MIT',
     description='Boilerplate for creating publishable lists of objects',
     long_description=open('README.rst').read(),
+    install_requires=[
+        'django-model-utils>=2.0.3',
+        'factory-boy>=2.3.1',
+    ],
     url='https://github.com/richardbarran/django-mininews',
     author='Richard Barran',
     author_email='richard@arbee-design.co.uk',
     classifiers=[
-    	'Development Status :: 3 - Alpha',
+        'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
