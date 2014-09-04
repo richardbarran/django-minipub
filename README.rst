@@ -1,6 +1,14 @@
 Django-mininews
 ===============
 
+.. image:: https://pypip.in/v/django-mininews/badge.png
+    :target: https://crate.io/packages/django-mininews/
+    :alt: Latest PyPI version
+
+.. image:: https://pypip.in/d/django-mininews/badge.png
+    :target: https://crate.io/packages/django-mininews/
+    :alt: Number of PyPI downloads
+
 A toolkit that provides boilerplate code used in creating apps for Articles, Blogs, etc...
 
 Why?
