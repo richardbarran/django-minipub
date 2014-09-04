@@ -1,0 +1,4 @@
+# List here the requirements for running this package.
+django>=1.4
+django-model-utils>=2.0.3
+

@@ -1,4 +1,15 @@
+#/usr/bin/env python
+
+import os
 from setuptools import setup, find_packages
+
+ROOT_DIR = os.path.dirname(__file__)
+
+
+def get_requirements(requirements_file):
+    with open(requirements_file) as f:
+        required = [line.split('#')[0] for line in f.read().splitlines()]
+    return required
 
 setup(
     name='django-mininews',
@@ -7,10 +18,7 @@ setup(
     license='MIT',
     description='Boilerplate for creating publishable lists of objects',
     long_description=open('README.rst').read(),
-    install_requires=[
-        'django-model-utils>=2.0.3',
-        'factory-boy>=2.3.1',
-    ],
+    install_requires=get_requirements(os.path.join(ROOT_DIR, 'requirements.txt')),
     url='https://github.com/richardbarran/django-mininews',
     author='Richard Barran',
     author_email='richard@arbee-design.co.uk',
