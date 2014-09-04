@@ -4,3 +4,4 @@ Changelog
 0.2 (unreleased)
 ----------------
 
+- Strip out the SEO fields and model - they belong in their own, separate, application.

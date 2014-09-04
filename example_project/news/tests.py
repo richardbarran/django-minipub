@@ -1,13 +1,11 @@
 from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from django.test.utils import override_settings
 
 from .factories import ArticleFactory
 from .models import Article
 
 import datetime
-import decimal
 
 """
 Welcome... here are all the tests for the mininews application.
@@ -29,6 +27,7 @@ be inherited easily if you're writing an app that extends this one.
 
 
 class ArticleModelTest(TestCase):
+
     """Various tests on the Article model."""
 
     def setUp(self):
@@ -89,7 +88,9 @@ class ArticleModelTest(TestCase):
 
         self.assertNotEqual(article.start, None)
 
+
 class ArticleListTest(TestCase):
+
     """The landing page has a (paginated) list of all articles."""
 
     def setUp(self):
@@ -158,9 +159,9 @@ class ArticleListTest(TestCase):
                          20)
         # Check first and last items.
         self.assertEqual(response.context['article_list'][0].title,
-                                 'article022')
+                         'article022')
         self.assertEqual(response.context['article_list'][19].title,
-                                 'article003')
+                         'article003')
 
         # Now get the second page of results.
         response = self.client.get('/news/', {'page': 2})
@@ -169,11 +170,13 @@ class ArticleListTest(TestCase):
                          2)
         # Check first and last items.
         self.assertEqual(response.context['article_list'][0].title,
-                                 'article002')
+                         'article002')
         self.assertEqual(response.context['article_list'][1].title,
-                                 'article001')
+                         'article001')
+
 
 class ArticleListYearTest(TestCase):
+
     """The landing page lists all the years for which we have articles.
     Then we can filter down the show just the articles for a given year."""
 
@@ -192,8 +195,8 @@ class ArticleListYearTest(TestCase):
         response = self.client.get('/news/')
 
         self.assertEqual(list(response.context['date_list']),
-                          [datetime.date(2012, 1, 1),
-                           datetime.date(2011, 1, 1)])
+                         [datetime.date(2012, 1, 1),
+                          datetime.date(2011, 1, 1)])
 
         # The years are listed in the template.
         self.assertContains(response, '2012</a>')
@@ -208,8 +211,7 @@ class ArticleListYearTest(TestCase):
         response = self.client.get('/news/')
 
         self.assertEqual(list(response.context['date_list']),
-                          [datetime.date(2011, 1, 1)])
-
+                         [datetime.date(2011, 1, 1)])
 
     def test_get_year_page(self):
         """We can request the articles for a given year."""
@@ -229,6 +231,7 @@ class ArticleListYearTest(TestCase):
 
         response = self.client.get('/news/year/2012/')
         self.assertEqual(response.status_code, 404)
+
 
 class ArticleDetailTest(TestCase):
 
@@ -272,6 +275,7 @@ class ArticleDetailTest(TestCase):
         response = self.client.get('/news/some-news-about-me/')
         self.assertEqual(response.status_code, 200)
 
+
 class SitemapTest(TestCase):
 
     def setUp(self):
@@ -289,30 +293,3 @@ class SitemapTest(TestCase):
         # Has the modified date - which will always be today.
         today_as_string = datetime.date.today().today().strftime('%Y-%m-%d')
         self.assertContains(response, '<lastmod>{0}</lastmod>'.format(today_as_string))
-
-    def test_priority(self):
-        """Get the sitemap, set the priority level of an article."""
-
-        self.article1.sitemap_priority = decimal.Decimal('0.2')
-        self.article1.save()
-
-        response = self.client.get('/sitemap.xml')
-        self.assertEqual(response.status_code, 200)
-
-        self.assertContains(response, '<priority>0.2</priority>')
-
-    def test_priority_field(self):
-        """Validation for the sitemap_priority field."""
-
-        # Values between 0 and 1 are fine.
-        self.article1.sitemap_priority = decimal.Decimal('0.2')
-        self.article1.save()
-
-        # Outside that range is ungood.
-        self.article1.sitemap_priority = decimal.Decimal('-1.0')
-        with self.assertRaisesMessage(ValidationError, 'Please enter a number between 0 and 1'):
-            self.article1.full_clean()
-
-        self.article1.sitemap_priority = decimal.Decimal('1.2')
-        with self.assertRaisesMessage(ValidationError, 'Please enter a number between 0 and 1'):
-            self.article1.full_clean()

@@ -13,7 +13,6 @@ class ArticleAdmin(ArticleAdmin):
             'fields': ('title', 'slug', 'body',)
         }),
         ArticleAdmin.PUBLICATION_FIELDSET,
-        ArticleAdmin.SEO_FIELDSET,
         ArticleAdmin.TIMESTAMP_FIELDSET
     )
 

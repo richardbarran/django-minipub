@@ -1,5 +1,6 @@
 from django.contrib.sitemaps import Sitemap
 
+
 class MininewsSitemap(Sitemap):
 
     # Let's assume that an article - once published - will not change.
@@ -13,6 +14,3 @@ class MininewsSitemap(Sitemap):
 
     def lastmod(self, obj):
         return obj.modified
-
-    def priority(self, obj):
-        return obj.sitemap_priority
