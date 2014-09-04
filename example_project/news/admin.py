@@ -2,7 +2,8 @@ from django.contrib import admin
 
 from mininews.admin import ArticleAdmin
 
-from models import Article
+from .models import Article
+
 
 class ArticleAdmin(ArticleAdmin):
     list_display = ('title', 'viewable', 'status', 'start')
