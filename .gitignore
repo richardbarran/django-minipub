@@ -1,1 +1,7 @@
+# Python bytecode:
+*.py[co]
+
+# Example project database.
 db.sqlite3
+
+
