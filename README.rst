@@ -9,7 +9,8 @@ Django-mininews
     :target: https://crate.io/packages/django-mininews/
     :alt: Number of PyPI downloads
 
-.. image:: https://secure.travis-ci.org/richardbarran/django-mininews.png?branch=master
+.. image:: https://travis-ci.org/richardbarran/django-mininews.svg?branch=master
+    :target: https://travis-ci.org/richardbarran/django-mininews
 
 A toolkit that provides boilerplate code used in creating apps for Articles, Blogs, etc...
 
