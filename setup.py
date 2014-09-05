@@ -3,6 +3,8 @@
 import os
 from setuptools import setup, find_packages
 
+import mininews
+
 ROOT_DIR = os.path.dirname(__file__)
 
 
@@ -13,7 +15,7 @@ def get_requirements(requirements_file):
 
 setup(
     name='django-mininews',
-    version='0.1',
+    version=mininews.__version__,
     packages=find_packages(exclude=['example_project']),
     license='MIT',
     description='Boilerplate for creating publishable lists of objects',

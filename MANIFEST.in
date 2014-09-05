@@ -1,2 +1,5 @@
+include CHANGELOG.txt
 include LICENSE.txt
 include README.rst
+include requirements.txt
+global-exclude *.pyc
