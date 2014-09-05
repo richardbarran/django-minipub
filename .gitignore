@@ -4,4 +4,6 @@
 # Example project database.
 db.sqlite3
 
+# Package builds
+django_mininews.egg-info
 
