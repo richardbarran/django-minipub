@@ -4,7 +4,7 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Tidied up the example_project.
 
 
 0.2 (2014-09-05)

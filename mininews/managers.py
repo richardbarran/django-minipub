@@ -14,8 +14,3 @@ class ArticleQuerySet(QuerySet):
         return self.filter(status__in=statuses).\
             filter(Q(start__lte=datetime.date.today) | Q(start__isnull=True)).\
             filter(Q(end__gte=datetime.date.today) | Q(end__isnull=True))
-
-    def date_list(self, kind='year'):
-        """A convenience method - when listing articles, we'll often want to
-        show all the years for which we have articles."""
-        return self.model.objects.viewable().dates('start', kind, order='DESC')

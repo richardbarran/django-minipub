@@ -1,5 +1,10 @@
 /*! project specific CSS goes here. */
 
 article.news_article {
-	margin: 20px 0;
+	margin: 20px 0 50px 0;
+}
+
+.news_teaser {
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
