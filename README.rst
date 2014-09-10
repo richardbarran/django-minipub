@@ -15,7 +15,7 @@ Django-mininews
 Django-mininews is a basic tool for controlling the *publication* of objects.
 
 Let's take an example: you have a 'news' application, that just consists of a 
-Article model. In the admin interface, we have this:
+Article model. In the admin interface, we have this fieldset:
 
 .. image:: docs/img/mininews-fieldset.png
 
@@ -36,6 +36,14 @@ These can be of use for tracking changes to an Article.
 
 And that's it... Mininews is just some boilerplate code, that you will 
 reuse again and again throughout a project.
+
+What can I use it for?
+----------------------
+Here are some examples of Mininews at work:
+
+- `Minutes of the meetings of an association <http://www.saphra.org.uk/meetings/>`_.
+- `Controlling the publication of the Events at a well-known racetrack <http://www.silverstone.co.uk/events/>`_.
+- `Controlling when job offers are displayed <http://www.ipglobal-ltd.com/en/about/careers/>`_.
 
 Installation and usage
 ----------------------
