@@ -12,45 +12,32 @@ Django-mininews
 .. image:: https://travis-ci.org/richardbarran/django-mininews.svg?branch=master
     :target: https://travis-ci.org/richardbarran/django-mininews
 
-A toolkit that provides boilerplate code used in creating apps for Articles, Blogs, etc...
+Django-mininews is a basic tool for controlling the *publication* of objects.
 
-Why?
-----
-The author has written several Blog/News type applications for clients; after a 
-while he noticed that:
+Let's take an example: you have a 'news' application, that just consists of a 
+Article model. In the admin interface, we have this:
 
-- Most blog engines for Django are feature-rich - see Zinnia for example.
-- Most of the websites built only need a subset of those features.
-- For each site, the client needs differ slightly - for
-  example, specifying which WYSIWYG editor to use; or adding tagging; or using
-  expiry dates.
-- Several of the blog/news applications on Pypi look like abandonware; probably
-  because they were just too complex for their author to keep on maintaining...
-- Clients are (understandably) curious about features that exist in a third-party
-  app, appear in the admin interface of their website, but are not actually used
-  (and the same questions get raised each time a new
-  intern takes over managing the client's blog page).
+.. image:: docs/img/mininews-fieldset.png
 
-The answer to the above was to create a toolkit that included a very limited
-feature set, but that was *very* easy to customise. In fact, django-mininews by
-default does not ship with a urls.py - the intent is that you will *never* use
-it 'out of the box', but rather as a starting point for your own application.
+All articles have the following 3 fields:
 
-So, what does it do?
---------------------
-Basically, it provides an abstract model with:
+- status: usually 'draft' or 'published'.
+- start: start date, defaults to whenever the status is changed to ``published``.
+- end: end date; optional.
 
-- Publication fields: status, start date, and end date.
-- SEO fields (meta + sitemap priority).
-- A set of timestamps to monitor each record (timestamp created, last modified,
-  last change of status).
-- Erm, that's it.
+Articles can only be viewed in the public website **if** they are ``published``
+**and** between the start and end dates.
 
-The above fields are then used in plenty of boilerplate code for the admin, views,
-sitemaps, and so on.
+Oh, we also have a fieldset for showing various read-only status fields:
 
-TODO:
-- Atom feeds.
-- The list view shows the latest articles/posts... add alongside this the ListView
-  so that devs can add custom ordering (and not be forced to use 'date, descending').
-- Add OpenGraph template snippet (article tags)
+.. image:: docs/img/mininews-status-fieldset.png
+
+These can be of use for tracking changes to an Article.
+
+And that's it... Mininews is just some boilerplate code, that you will 
+reuse again and again throughout a project.
+
+Installation and usage
+----------------------
+Please take a look at
+`the documentation <http://django-mininews.readthedocs.org/en/latest/index.html>`_ on ReadTheDocs.
