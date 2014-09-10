@@ -5,6 +5,7 @@ Changelog
 ----------------
 
 - Tidied up the example_project.
+- Started on the documentation.
 
 
 0.2 (2014-09-05)

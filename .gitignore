@@ -7,3 +7,5 @@ db.sqlite3
 # Package builds
 django_mininews.egg-info
 
+# Documentation
+docs/_build/*

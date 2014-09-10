@@ -14,8 +14,6 @@ class AbstractArticleModel(StatusModel, TimeStampedModel):
 
     """
 
-    'Viewable'
-    ----------
     All articles have the following 3 fields:
     - status: usually 'draft' or 'published'.
     - start: start date, defaults to time of publication.
@@ -24,6 +22,9 @@ class AbstractArticleModel(StatusModel, TimeStampedModel):
     Articles can only be viewed in the front end if they are 'published'
     and between the start and end dates.
     
+    'Viewable'
+    ----------
+
     ``viewable()`` methods are available both as chainable filters on a queryset,
     and as instance methods.
 
@@ -42,7 +43,7 @@ class AbstractArticleModel(StatusModel, TimeStampedModel):
 
     STATUS = Choices('draft', 'published')
 
-    # NB: start is a required field, as it is used for sorting the articles in
+    # TODO: start is a required field when published, as it is used for sorting the articles in
     # the archive views.
     start = models.DateField('start date', null=True, blank=True)
     end = models.DateField('end date', null=True, blank=True)
