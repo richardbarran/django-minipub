@@ -1,3 +1,57 @@
+"""
+
+``MininewsModel`` is an abstract model that provides the following 3 fields:
+
+- ``status``: a list of choices; default is 'draft' or 'published'.
+- ``start``: a start date; defaults to date of publication.
+- ``end``: an end date; optional.
+
+Objects can only be viewed in the front end **if** they are 'published'
+**and** between the start and end dates.
+
+Timestamps
+----------
+``MininewsModel`` also adds the following read-only fields: ``created``, ``modified`` and ``status_changed``.
+
+'Viewable'
+----------
+
+``viewable()`` methods are available both as a chainable filter on a queryset,
+and as an instance method. For example, if you have an ``Article`` model that uses ``MininewsModel``:
+
+.. code-block:: python
+
+    my_articles = Article.objects.viewable()
+    
+or
+
+.. code-block:: python
+
+    can_be_viewed = article1.viewable()
+
+``viewable()`` take one optional argument: ``statuses``. This is for when you change
+the list of status choices; for example, imagine that your articles can be ``published``,
+but that at some point in time you will want to manually move them to an 'archived'
+section in the website.
+
+In your article model (that inherits from ``MininewsModel``) you would define::
+
+    STATUS = Choices('draft', 'published', 'archived')    
+
+Then the notion of 'viewable' will depend if you are in the section of the site that
+shows the ``published`` articles, or in the section that shows the ``archived`` articles.
+
+You would have in your ``views.py`` 2 sets of views:
+
+- for the main pages.
+- for the archived pages.
+
+In each of these you would define what status (or statuses) make an article 'viewable'.
+
+
+"""
+
+
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -7,39 +61,10 @@ from model_utils.managers import PassThroughManager
 
 import datetime
 
-from .managers import ArticleQuerySet
+from .managers import MininewsQuerySet
 
 
-class AbstractArticleModel(StatusModel, TimeStampedModel):
-
-    """
-
-    All articles have the following 3 fields:
-    - status: usually 'draft' or 'published'.
-    - start: start date, defaults to time of publication.
-    - end: end date; optional.
-    
-    Articles can only be viewed in the front end if they are 'published'
-    and between the start and end dates.
-    
-    'Viewable'
-    ----------
-
-    ``viewable()`` methods are available both as chainable filters on a queryset,
-    and as instance methods.
-
-    ``viewable()`` take one optional argument: ``statuses``. This is for when you change
-    the status list; for example, if you define::
-
-        STATUS = Choices('draft', 'published', 'archived')    
-
-    Then the notion of ``viewable`` will depend if you are in the section of the site that
-    shows the ``published`` articles, or in the section that shows the ``archived`` articles.
-
-    So you can specify what makes an article ``viewable``; the default is ``published``.
-
-
-    """
+class MininewsModel(StatusModel, TimeStampedModel):
 
     STATUS = Choices('draft', 'published')
 
@@ -48,23 +73,24 @@ class AbstractArticleModel(StatusModel, TimeStampedModel):
     start = models.DateField('start date', null=True, blank=True)
     end = models.DateField('end date', null=True, blank=True)
 
-    objects = PassThroughManager.for_queryset_class(ArticleQuerySet)()
+    objects = PassThroughManager.for_queryset_class(MininewsQuerySet)()
 
     class Meta:
         abstract = True
 
     def save(self, *args, **kwargs):
         """Set the publication date for published items if it hasn't been set already."""
+        # TODO: if an article is set to 'archived' it should also trigger the start date.
         if self.status == self.STATUS.published and self.start is None:
             self.start = datetime.date.today()
-        super(AbstractArticleModel, self).save(*args, **kwargs)
+        super(MininewsModel, self).save(*args, **kwargs)
 
     def clean(self):
+        # TODO: fail we are setting 'published' and the end date is in the past?
         if self.start and self.end and self.start > self.end:
             raise ValidationError('The end date cannot be before the start date.')
 
     def viewable(self, statuses=['published']):
-        """Can this article be viewed?"""
         if not self.status in statuses:
             return False
         if self.start and self.start > datetime.date.today():

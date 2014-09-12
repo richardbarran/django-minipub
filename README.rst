@@ -34,8 +34,8 @@ Oh, we also have a fieldset for showing various read-only status fields:
 
 These can be of use for tracking changes to an Article.
 
-And that's it... Mininews is just some boilerplate code, that you will 
-reuse again and again throughout a project.
+And that's it... Mininews is just an abstract Model, together with plenty of code to make
+the best use of it, that you will reuse again and again throughout a project.
 
 What can I use it for?
 ----------------------

@@ -2,11 +2,11 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.encoding import python_2_unicode_compatible
 
-from mininews.models import AbstractArticleModel
+from mininews.models import MininewsModel
 
 
 @python_2_unicode_compatible
-class Article(AbstractArticleModel):
+class Article(MininewsModel):
 
     title = models.CharField(unique=True, max_length=50)
     slug = models.SlugField()

@@ -37,4 +37,4 @@ Add ``mininews`` to your ``INSTALLED_APPS`` setting::
          'mininews',
     )
 
-You are now ready to use mininews in your code...
+You are now ready to use mininews in your code.

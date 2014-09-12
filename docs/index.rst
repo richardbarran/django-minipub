@@ -13,6 +13,7 @@ Contents:
 
    pages/installation
    pages/user_perspective
+   pages/usage
 
 
 

@@ -4,6 +4,7 @@ Changelog
 0.3 (unreleased)
 ----------------
 
+- Renamed AbstractArticleModel to MininewsModel.
 - Tidied up the example_project.
 - Started on the documentation.
 
