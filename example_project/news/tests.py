@@ -38,32 +38,32 @@ class ArticleModelTest(TestCase):
         """Only published articles should be seen."""
 
         # By default the factory publishes articles.
-        self.assertQuerysetEqual(Article.objects.viewable().all(),
+        self.assertQuerysetEqual(Article.objects.live().all(),
                                  ['<Article: Some news about me>'])
 
         self.article1.status = Article.STATUS.draft
         self.article1.save()
-        self.assertQuerysetEqual(Article.objects.viewable().all(),
+        self.assertQuerysetEqual(Article.objects.live().all(),
                                  [])
-        self.assertEqual(self.article1.viewable(), False)
+        self.assertEqual(self.article1.live(), False)
 
     def test_start(self):
         """Only articles with a start date in the past can be seen."""
 
         self.article1.start = datetime.date(2999, 1, 1)
         self.article1.save()
-        self.assertQuerysetEqual(Article.objects.viewable().all(),
+        self.assertQuerysetEqual(Article.objects.live().all(),
                                  [])
-        self.assertEqual(self.article1.viewable(), False)
+        self.assertEqual(self.article1.live(), False)
 
     def test_end(self):
         """Only articles with an end date in the future can be seen."""
 
         self.article1.end = datetime.date(1901, 1, 1)
         self.article1.save()
-        self.assertQuerysetEqual(Article.objects.viewable().all(),
+        self.assertQuerysetEqual(Article.objects.live().all(),
                                  [])
-        self.assertEqual(self.article1.viewable(), False)
+        self.assertEqual(self.article1.live(), False)
 
     def test_dates(self):
         """Start date has to be before the end date."""
@@ -202,8 +202,8 @@ class ArticleListYearTest(TestCase):
         self.assertContains(response, '2012</a>')
         self.assertContains(response, '2011</a>')
 
-    def test_list_viewable(self):
-        """Only show years for which we have viewable articles."""
+    def test_list_live(self):
+        """Only show years for which we have live articles."""
 
         self.article3.status = Article.STATUS.draft
         self.article3.save()
@@ -222,9 +222,9 @@ class ArticleListYearTest(TestCase):
         self.assertQuerysetEqual(response.context['article_list'],
                                  ['<Article: article 3>'])
 
-    def test_year_not_viewable(self):
-        """Articles that are not viewable do not appear in the year page.
-        By extension, a year with no viewable articles gives a 404"""
+    def test_year_not_live(self):
+        """Articles that are not live do not appear in the year page.
+        By extension, a year with no live articles gives a 404"""
 
         self.article3.status = Article.STATUS.draft
         self.article3.save()

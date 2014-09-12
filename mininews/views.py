@@ -13,7 +13,7 @@ class ArticleArchiveView(ArchiveIndexView):
     allow_empty = True
 
     def get_queryset(self):
-        return self.model.objects.viewable()
+        return self.model.objects.live()
 
 
 class ArticleYearArchiveView(YearArchiveView):
@@ -23,7 +23,7 @@ class ArticleYearArchiveView(YearArchiveView):
     make_object_list = True
 
     def get_queryset(self):
-        return self.model.objects.viewable()
+        return self.model.objects.live()
 
 
 class ArticleDetailView(DetailView):
@@ -34,9 +34,9 @@ class ArticleDetailView(DetailView):
         if self.request.user.is_authenticated() and self.request.user.is_staff:
             return article
         if statuses:
-            if not article.viewable(statuses):
+            if not article.live(statuses):
                 raise Http404
         else:
-            if not article.viewable():
+            if not article.live():
                 raise Http404
         return article

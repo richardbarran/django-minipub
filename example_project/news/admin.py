@@ -6,7 +6,7 @@ from .models import Article
 
 
 class ArticleAdmin(ArticleAdmin):
-    list_display = ('title', 'viewable', 'status', 'start')
+    list_display = ('title', 'live', 'status', 'start')
     prepopulated_fields = {"slug": ("title",)}
     fieldsets = (
         (None, {

@@ -6,31 +6,34 @@
 - ``start``: a start date; defaults to date of publication.
 - ``end``: an end date; optional.
 
-Objects can only be viewed in the front end **if** they are 'published'
-**and** between the start and end dates.
-
 Timestamps
 ----------
 ``MininewsModel`` also adds the following read-only fields: ``created``, ``modified`` and ``status_changed``.
 
-'Viewable'
-----------
+The concept of 'Live' objects
+-----------------------------
 
-``viewable()`` methods are available both as a chainable filter on a queryset,
+Objects are usually considered 'live' **if** they are 'published'
+**and** between the start and end dates - this is usually sufficient for them being available
+to display in the public website.
+
+``live()`` methods are available both as a chainable filter on a queryset,
 and as an instance method. For example, if you have an ``Article`` model that uses ``MininewsModel``:
 
 .. code-block:: python
 
-    my_articles = Article.objects.viewable()
+    my_articles = Article.objects.live()
     
 or
 
 .. code-block:: python
 
-    can_be_viewed = article1.viewable()
+    can_be_viewed = article1.live()
 
-``viewable()`` take one optional argument: ``statuses``. This is for when you change
-the list of status choices; for example, imagine that your articles can be ``published``,
+Refining the concept of a 'Live' object
+---------------------------------------
+
+Imagine that your articles can be ``published``,
 but that at some point in time you will want to manually move them to an 'archived'
 section in the website.
 
@@ -38,7 +41,7 @@ In your article model (that inherits from ``MininewsModel``) you would define::
 
     STATUS = Choices('draft', 'published', 'archived')    
 
-Then the notion of 'viewable' will depend if you are in the section of the site that
+Then the notion of 'live' will depend if you are in the section of the site that
 shows the ``published`` articles, or in the section that shows the ``archived`` articles.
 
 You would have in your ``views.py`` 2 sets of views:
@@ -46,7 +49,11 @@ You would have in your ``views.py`` 2 sets of views:
 - for the main pages.
 - for the archived pages.
 
-In each of these you would define what status (or statuses) make an article 'viewable'.
+In each of these you would define what status (or statuses) make an article 'live'.
+
+``live()`` take one optional argument: ``statuses``. This is for when you change
+the list of status choices; for example, 
+
 
 
 """
@@ -90,7 +97,8 @@ class MininewsModel(StatusModel, TimeStampedModel):
         if self.start and self.end and self.start > self.end:
             raise ValidationError('The end date cannot be before the start date.')
 
-    def viewable(self, statuses=['published']):
+    def live(self, statuses=['published']):
+        # TODO: an object cannot be 'live' if its start date is not set.
         if not self.status in statuses:
             return False
         if self.start and self.start > datetime.date.today():
@@ -98,4 +106,4 @@ class MininewsModel(StatusModel, TimeStampedModel):
         if self.end and self.end < datetime.date.today():
             return False
         return True
-    viewable.boolean = True
+    live.boolean = True

@@ -5,6 +5,7 @@ Changelog
 ----------------
 
 - Renamed AbstractArticleModel to MininewsModel.
+- Renamed viewable() to live().
 - Tidied up the example_project.
 - Started on the documentation.
 

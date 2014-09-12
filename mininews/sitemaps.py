@@ -10,7 +10,7 @@ class MininewsSitemap(Sitemap):
     model = None
 
     def items(self):
-        return self.model.objects.viewable()
+        return self.model.objects.live()
 
     def lastmod(self, obj):
         return obj.modified

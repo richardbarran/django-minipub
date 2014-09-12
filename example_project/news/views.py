@@ -16,8 +16,8 @@ class ArticleYearArchiveView(ArticleYearArchiveView):
     context_object_name = 'article_list'
 
     def get_date_list(self, queryset, date_type='year', ordering='DESC'):
-        # TODO: get_date_list() on mininews should be overidden to work on queryset.viewable().
-        return self.model.objects.viewable().dates('start', date_type, order=ordering)
+        # TODO: get_date_list() on mininews should be overidden to work on queryset.live().
+        return self.model.objects.live().dates('start', date_type, order=ordering)
 
 
 class ArticleDetailView(ArticleDetailView):
