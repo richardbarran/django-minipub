@@ -47,5 +47,8 @@ Here are some examples of Mininews at work:
 
 Installation and usage
 ----------------------
+.. image:: https://readthedocs.org/projects/django-mininews/badge/?version=latest
+    :target: https://readthedocs.org/projects/django-mininews/?badge=latest
+    :alt: Documentation Status
 Please take a look at
 `the documentation <http://django-mininews.readthedocs.org/en/latest/index.html>`_ on ReadTheDocs.
