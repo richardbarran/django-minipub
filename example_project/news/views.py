@@ -1,5 +1,3 @@
-from django.shortcuts import get_object_or_404
-
 from mininews.views import MininewsArchiveIndexView, MininewsYearArchiveView, \
     MininewsDetailView
 
@@ -23,7 +21,3 @@ class ArticleYearArchiveView(MininewsYearArchiveView):
 class ArticleDetailView(MininewsDetailView):
     model = Article
     context_object_name = 'article'
-
-    def get_object(self):
-        article = get_object_or_404(self.model, slug=self.kwargs['slug'])
-        return self._allowed(article)
