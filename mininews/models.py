@@ -52,7 +52,7 @@ You would have in your ``views.py`` 2 sets of views:
 In each of these you would define what status (or statuses) make an article 'live'.
 
 ``live()`` take one optional argument: ``statuses``. This is for when you change
-the list of status choices; for example, 
+the list of status choices; for example...
 
 
 
@@ -72,6 +72,9 @@ from .managers import MininewsQuerySet
 
 
 class MininewsModel(StatusModel, TimeStampedModel):
+
+    # TODO: add a property to the model so that in the template we can
+    # highlight not-live articles.
 
     STATUS = Choices('draft', 'published')
 

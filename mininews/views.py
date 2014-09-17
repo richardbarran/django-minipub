@@ -3,7 +3,7 @@ from django.views.generic import DetailView
 from django.http import Http404
 
 
-class ArticleArchiveView(ArchiveIndexView):
+class MininewsArchiveIndexView(ArchiveIndexView):
     model = None
     date_field = 'start'
     paginate_by = 20
@@ -13,14 +13,12 @@ class ArticleArchiveView(ArchiveIndexView):
     allow_empty = True
 
     def get_queryset(self):
-        # TODO: add a property to the model so that in the template we can
-        # highlight not-live articles.
         if self.request.user.is_authenticated() and self.request.user.is_staff:
             return self.model.objects.all()
         return self.model.objects.live()
 
 
-class ArticleYearArchiveView(YearArchiveView):
+class MininewsYearArchiveView(YearArchiveView):
     model = None
     date_field = 'start'
     paginate_by = 20
@@ -32,7 +30,7 @@ class ArticleYearArchiveView(YearArchiveView):
         return self.model.objects.live()
 
 
-class ArticleDetailView(DetailView):
+class MininewsDetailView(DetailView):
     model = None
 
     def _allowed(self, article, statuses=None):

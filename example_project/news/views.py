@@ -1,17 +1,17 @@
 from django.shortcuts import get_object_or_404
 
-from mininews.views import ArticleArchiveView, ArticleYearArchiveView, \
-    ArticleDetailView
+from mininews.views import MininewsArchiveIndexView, MininewsYearArchiveView, \
+    MininewsDetailView
 
 from .models import Article
 
 
-class ArticleArchiveView(ArticleArchiveView):
+class ArticleArchiveView(MininewsArchiveIndexView):
     model = Article
     context_object_name = 'article_list'
 
 
-class ArticleYearArchiveView(ArticleYearArchiveView):
+class ArticleYearArchiveView(MininewsYearArchiveView):
     model = Article
     context_object_name = 'article_list'
 
@@ -20,7 +20,7 @@ class ArticleYearArchiveView(ArticleYearArchiveView):
         return self.model.objects.live().dates('start', date_type, order=ordering)
 
 
-class ArticleDetailView(ArticleDetailView):
+class ArticleDetailView(MininewsDetailView):
     model = Article
     context_object_name = 'article'
 
