@@ -8,3 +8,7 @@ article.news_article {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
+.label.label-warning {
+	font-size: 100%;
+}

@@ -88,6 +88,16 @@ class ArticleModelTest(TestCase):
 
         self.assertNotEqual(article.start, None)
 
+    def test_draft_preview(self):
+        """Helper property: is article draft?"""
+
+        self.assertEqual(self.article1.staff_preview, False)
+
+        self.article1.status = Article.STATUS.draft
+        self.article1.save()
+
+        self.assertEqual(self.article1.staff_preview, True)
+
 
 class ArticleListTest(TestCase):
 

@@ -8,6 +8,7 @@ Changelog
 - Renamed viewable() to live().
 - Renamed all the views.
 - All articles should be viewable in list views to staff users.
+- Added a 'staff_preview' property.
 - Tidied up the example_project.
 - Started on the documentation.
 

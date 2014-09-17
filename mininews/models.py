@@ -110,3 +110,23 @@ class MininewsModel(StatusModel, TimeStampedModel):
             return False
         return True
     live.boolean = True
+
+    @property
+    def staff_preview(self):
+        """Helper property - says if this object is being previewed by a member of staff.
+
+        Can be used when displaying objects in the website - members of staff will see all 
+        objects, using this property in the template can help for attaching a message/custom
+        CSS saying that this object is being previewed.
+
+        For example, in the example_project we have this snippet:
+
+        .. code-block:: django
+            
+            {% if article.staff_preview %}
+                <div class="label label-warning">This is a preview</div>
+            {% endif %}
+
+        """
+
+        return self.status == self.STATUS.draft
