@@ -132,6 +132,24 @@ class ArticleListTest(TestCase):
         self.assertQuerysetEqual(response.context['article_list'],
                                  ['<Article: article 2>', '<Article: article 3>'])
 
+    def test_published_staff(self):
+        """Staff members can see articles that are not published."""
+
+        self.article1.status = Article.STATUS.draft
+        self.article1.save()
+
+        user = User.objects.create_user('john.doe',
+                                        'john.doe@example.com',
+                                        'secret')
+        user.is_staff = True
+        user.save()
+        self.assertTrue(self.client.login(username='john.doe', password='secret'))
+
+        response = self.client.get('/news/')
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(response.context['article_list'],
+                                 ['<Article: article 2>', '<Article: article 3>', '<Article: article 1>'])
+
     def test_nothing(self):
         """Still show the page even if no articles are available."""
 
@@ -231,6 +249,23 @@ class ArticleListYearTest(TestCase):
 
         response = self.client.get('/news/year/2012/')
         self.assertEqual(response.status_code, 404)
+
+    def test_year_not_live_staff(self):
+        """Staff members can see articles even if not published."""
+
+        self.article3.status = Article.STATUS.draft
+        self.article3.save()
+
+        user = User.objects.create_user('john.doe',
+                                        'john.doe@example.com',
+                                        'secret')
+        user.is_staff = True
+        user.save()
+        self.assertTrue(self.client.login(username='john.doe', password='secret'))
+
+        response = self.client.get('/news/year/2012/')
+        self.assertQuerysetEqual(response.context['article_list'],
+                                 ['<Article: article 3>'])
 
 
 class ArticleDetailTest(TestCase):

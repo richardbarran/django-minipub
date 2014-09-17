@@ -13,6 +13,10 @@ class ArticleArchiveView(ArchiveIndexView):
     allow_empty = True
 
     def get_queryset(self):
+        # TODO: add a property to the model so that in the template we can
+        # highlight not-live articles.
+        if self.request.user.is_authenticated() and self.request.user.is_staff:
+            return self.model.objects.all()
         return self.model.objects.live()
 
 
@@ -23,6 +27,8 @@ class ArticleYearArchiveView(YearArchiveView):
     make_object_list = True
 
     def get_queryset(self):
+        if self.request.user.is_authenticated() and self.request.user.is_staff:
+            return self.model.objects.all()
         return self.model.objects.live()
 
 
