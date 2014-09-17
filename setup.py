@@ -17,6 +17,7 @@ setup(
     name='django-mininews',
     version=mininews.__version__,
     packages=find_packages(exclude=['example_project']),
+    include_package_data=True,
     license='MIT',
     description='Boilerplate for creating publishable lists of objects',
     long_description=open('README.rst').read(),
