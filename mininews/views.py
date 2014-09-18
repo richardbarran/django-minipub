@@ -5,9 +5,10 @@ from django.views.generic import DetailView
 class GetQuerysetMixin(object):
 
     def get_queryset(self):
+        qs = super(GetQuerysetMixin, self).get_queryset()
         if self.request.user.is_authenticated() and self.request.user.is_staff:
-            return self.model.objects.all()
-        return self.model.objects.live()
+            return qs
+        return qs.live()
 
 
 class MininewsArchiveIndexView(GetQuerysetMixin, ArchiveIndexView):
