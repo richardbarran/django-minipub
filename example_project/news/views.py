@@ -12,10 +12,19 @@ class ArticleArchiveView(MininewsArchiveIndexView):
 class ArticleYearArchiveView(MininewsYearArchiveView):
     model = Article
     context_object_name = 'article_list'
+    date_list_period = 'year'
 
-    def get_date_list(self, queryset, date_type='year', ordering='DESC'):
-        # TODO: get_date_list() on mininews should be overidden to work on queryset.live().
-        return self.model.objects.live().dates('start', date_type, order=ordering)
+    def get_context_data(self, **kwargs):
+        """Not strictly required for the demo - I just prefer for the 'year' view to show
+        a sidebar with *all* the years that have articles."""
+
+        context = super(ArticleYearArchiveView, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated() and self.request.user.is_staff:
+            qs = self.model.objects.all()
+        else:
+            qs = self.model.objects.live()
+        context['date_list'] = qs.dates('start', 'year', order='DESC')
+        return context
 
 
 class ArticleDetailView(MininewsDetailView):

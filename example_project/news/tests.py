@@ -160,6 +160,41 @@ class ArticleListTest(TestCase):
         self.assertQuerysetEqual(response.context['article_list'],
                                  ['<Article: article 2>', '<Article: article 3>', '<Article: article 1>'])
 
+    def test_get_date_list(self):
+        """Archive view has a list of years for which we have articles."""
+
+        response = self.client.get('/news/')
+        self.assertQuerysetEqual(response.context['date_list'],
+                                 ['datetime.date(2012, 1, 1)', 'datetime.date(2011, 1, 1)'])
+
+        self.article1.status = Article.STATUS.draft
+        self.article1.save()
+
+        response = self.client.get('/news/')
+        self.assertQuerysetEqual(response.context['date_list'],
+                                 ['datetime.date(2012, 1, 1)'])
+
+    def test_get_date_list_staff(self):
+        """Archive view has a list of years for which we have articles - staff will
+        see all articles.
+
+        This behaviour is a result of us overriding the get_queryset() method in the view.
+        """
+
+        self.article1.status = Article.STATUS.draft
+        self.article1.save()
+
+        user = User.objects.create_user('john.doe',
+                                        'john.doe@example.com',
+                                        'secret')
+        user.is_staff = True
+        user.save()
+        self.assertTrue(self.client.login(username='john.doe', password='secret'))
+
+        response = self.client.get('/news/')
+        self.assertQuerysetEqual(response.context['date_list'],
+                                 ['datetime.date(2012, 1, 1)', 'datetime.date(2011, 1, 1)'])
+
     def test_nothing(self):
         """Still show the page even if no articles are available."""
 
