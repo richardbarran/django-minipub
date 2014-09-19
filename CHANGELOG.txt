@@ -7,6 +7,7 @@ Changelog
 - Renamed AbstractArticleModel to MininewsModel.
 - Renamed viewable() to live().
 - Renamed all the views.
+- Renamed admin class.
 - All articles should be viewable in list views to staff users.
 - Added a 'staff_preview' property.
 - Tidied up the example_project.
