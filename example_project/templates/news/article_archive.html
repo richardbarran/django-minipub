@@ -15,7 +15,7 @@
                     </h2>
                     <em>{{ article.start|default:"No start date set" }}</em>
                     {% if article.staff_preview %}
-                        <div class="label label-warning">This is a preview</div>
+                        <div class="label label-warning">{{ article.status|capfirst }} preview</div>
                     {% endif %}
                     <div class="news_teaser">{{ article.body|safe|linebreaksbr|truncatewords_html:20 }}</div>
                     <a href="{{ article.get_absolute_url }}" class="btn btn-default btn-sm">Read more</a>

@@ -9,7 +9,7 @@
         <div class="col-lg-12">
             <em>{{ article.start|default:"No start date set" }}</em>
             {% if article.staff_preview %}
-                <div class="label label-warning">This is a preview</div>
+                <div class="label label-warning">{{ article.status|capfirst }} preview</div>
             {% endif %}
             <article class="news_article">{{ article.body|safe|linebreaksbr }}</article>
             <a href="/news/" class="btn btn-default">View all articles</a>
