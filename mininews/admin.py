@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 
-class ArticleAdmin(admin.ModelAdmin):
+class MininewsAdmin(admin.ModelAdmin):
 
     """Just some boilerplate code that is useful in child classes."""
 

@@ -1,19 +1,19 @@
 from django.contrib import admin
 
-from mininews.admin import ArticleAdmin
+from mininews.admin import MininewsAdmin
 
 from .models import Article
 
 
-class ArticleAdmin(ArticleAdmin):
+class ArticleAdmin(MininewsAdmin):
     list_display = ('title', 'live', 'status', 'start')
     prepopulated_fields = {"slug": ("title",)}
     fieldsets = (
         (None, {
             'fields': ('title', 'slug', 'body',)
         }),
-        ArticleAdmin.PUBLICATION_FIELDSET,
-        ArticleAdmin.TIMESTAMP_FIELDSET
+        MininewsAdmin.PUBLICATION_FIELDSET,
+        MininewsAdmin.TIMESTAMP_FIELDSET
     )
 
 admin.site.register(Article, ArticleAdmin)
