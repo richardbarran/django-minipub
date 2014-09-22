@@ -13,10 +13,6 @@ class GetQuerysetMixin(object):
 
 class MininewsArchiveIndexView(GetQuerysetMixin, ArchiveIndexView):
     date_field = 'start'
-    # Display page even if no content; this is convenience as in practice the
-    # landing page for a blog will be in the main site menu, and it's not nice
-    # for that to lead to a 404.
-    allow_empty = True
 
 
 class MininewsYearArchiveView(GetQuerysetMixin, YearArchiveView):

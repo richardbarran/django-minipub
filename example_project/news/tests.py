@@ -195,21 +195,6 @@ class ArticleListTest(TestCase):
         self.assertQuerysetEqual(response.context['date_list'],
                                  ['datetime.date(2012, 1, 1)', 'datetime.date(2011, 1, 1)'])
 
-    def test_nothing(self):
-        """Still show the page even if no articles are available."""
-
-        self.article1.status = Article.STATUS.draft
-        self.article1.save()
-        self.article2.status = Article.STATUS.draft
-        self.article2.save()
-        self.article3.status = Article.STATUS.draft
-        self.article3.save()
-
-        response = self.client.get('/news/')
-        self.assertEqual(response.status_code, 200)
-
-        self.assertQuerysetEqual(response.context['article_list'], [])
-
 
 class ArticleListYearTest(TestCase):
 
