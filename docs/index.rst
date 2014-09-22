@@ -12,8 +12,8 @@ Contents:
    :maxdepth: 2
 
    pages/installation
-   pages/user_perspective
    pages/usage
+   pages/admin
 
 
 

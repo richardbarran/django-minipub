@@ -1,0 +1,6 @@
+#####
+Admin
+#####
+
+.. automodule:: mininews.admin
+

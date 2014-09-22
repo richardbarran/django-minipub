@@ -5,7 +5,7 @@ Changelog
 ----------------
 
 - Updated Bootstrap version used in example project.
-
+- Added more documentation.
 
 0.3 (2014-09-19)
 ----------------
