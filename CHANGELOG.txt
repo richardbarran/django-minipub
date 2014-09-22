@@ -4,7 +4,7 @@ Changelog
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Updated Bootstrap version used in example project.
 
 
 0.3 (2014-09-19)
