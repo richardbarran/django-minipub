@@ -13,7 +13,6 @@ class GetQuerysetMixin(object):
 
 class MininewsArchiveIndexView(GetQuerysetMixin, ArchiveIndexView):
     date_field = 'start'
-    paginate_by = 20
     # Display page even if no content; this is convenience as in practice the
     # landing page for a blog will be in the main site menu, and it's not nice
     # for that to lead to a 404.
@@ -22,7 +21,6 @@ class MininewsArchiveIndexView(GetQuerysetMixin, ArchiveIndexView):
 
 class MininewsYearArchiveView(GetQuerysetMixin, YearArchiveView):
     date_field = 'start'
-    paginate_by = 20
     make_object_list = True
 
 

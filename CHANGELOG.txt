@@ -4,6 +4,7 @@ Changelog
 0.4 (unreleased)
 ----------------
 
+- Removed pagination: it's not Mininews' job to control this.
 - Updated Bootstrap version used in example project.
 - Added more documentation.
 

@@ -210,33 +210,6 @@ class ArticleListTest(TestCase):
 
         self.assertQuerysetEqual(response.context['article_list'], [])
 
-    def test_pagination(self):
-        Article.objects.all().delete()
-        for i in range(1, 23):
-            ArticleFactory(title='article{0:0>3}'.format(i),
-                           start=datetime.date(day=i, month=12, year=2011))
-
-        response = self.client.get('/news/')
-
-        self.assertEqual(len(response.context['article_list']),
-                         20)
-        # Check first and last items.
-        self.assertEqual(response.context['article_list'][0].title,
-                         'article022')
-        self.assertEqual(response.context['article_list'][19].title,
-                         'article003')
-
-        # Now get the second page of results.
-        response = self.client.get('/news/', {'page': 2})
-
-        self.assertEqual(len(response.context['article_list']),
-                         2)
-        # Check first and last items.
-        self.assertEqual(response.context['article_list'][0].title,
-                         'article002')
-        self.assertEqual(response.context['article_list'][1].title,
-                         'article001')
-
 
 class ArticleListYearTest(TestCase):
 
