@@ -234,15 +234,6 @@ class ArticleListYearTest(TestCase):
         self.assertEqual(list(response.context['date_list']),
                          [datetime.date(2011, 1, 1)])
 
-    def test_get_year_page(self):
-        """We can request the articles for a given year."""
-
-        response = self.client.get('/news/year/2012/')
-
-        # Only that year's articles are available.
-        self.assertQuerysetEqual(response.context['article_list'],
-                                 ['<Article: article 3>'])
-
     def test_year_not_live(self):
         """Articles that are not live do not appear in the year page.
         By extension, a year with no live articles gives a 404"""
@@ -259,6 +250,8 @@ class ArticleListYearTest(TestCase):
         self.article3.status = Article.STATUS.draft
         self.article3.save()
 
+        # At this point, a GET would result in a 404, same as in
+        # previous test.
         user = User.objects.create_user('john.doe',
                                         'john.doe@example.com',
                                         'secret')
@@ -266,9 +259,9 @@ class ArticleListYearTest(TestCase):
         user.save()
         self.assertTrue(self.client.login(username='john.doe', password='secret'))
 
+        # Staff users can see this page.
         response = self.client.get('/news/year/2012/')
-        self.assertQuerysetEqual(response.context['article_list'],
-                                 ['<Article: article 3>'])
+        self.assertEqual(response.status_code, 200)
 
 
 class ArticleDetailTest(TestCase):

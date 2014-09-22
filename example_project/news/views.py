@@ -17,6 +17,7 @@ class ArticleYearArchiveView(MininewsYearArchiveView):
     model = Article
     context_object_name = 'article_list'
     date_list_period = 'year'
+    make_object_list = True  # Show all articles for that year.
 
     def get_context_data(self, **kwargs):
         """Not strictly required for the demo - I just prefer for the 'year' view to show

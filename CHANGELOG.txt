@@ -6,6 +6,7 @@ Changelog
 
 - Removed pagination: it's not Mininews' job to control this.
 - Do not set 'allow_empty': leave that to the end-user project.
+- Do not set 'make_object_list': leave that to the end-user project.
 - Updated Bootstrap version used in example project.
 - Added more documentation.
 

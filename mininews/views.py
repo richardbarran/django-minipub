@@ -17,7 +17,6 @@ class MininewsArchiveIndexView(GetQuerysetMixin, ArchiveIndexView):
 
 class MininewsYearArchiveView(GetQuerysetMixin, YearArchiveView):
     date_field = 'start'
-    make_object_list = True
 
 
 class MininewsDetailView(GetQuerysetMixin, DetailView):
