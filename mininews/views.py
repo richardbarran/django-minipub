@@ -12,7 +12,6 @@ class GetQuerysetMixin(object):
 
 
 class MininewsArchiveIndexView(GetQuerysetMixin, ArchiveIndexView):
-    model = None
     date_field = 'start'
     paginate_by = 20
     # Display page even if no content; this is convenience as in practice the
@@ -22,11 +21,10 @@ class MininewsArchiveIndexView(GetQuerysetMixin, ArchiveIndexView):
 
 
 class MininewsYearArchiveView(GetQuerysetMixin, YearArchiveView):
-    model = None
     date_field = 'start'
     paginate_by = 20
     make_object_list = True
 
 
 class MininewsDetailView(GetQuerysetMixin, DetailView):
-    model = None
+    pass
