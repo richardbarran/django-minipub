@@ -14,7 +14,7 @@ Contents:
    pages/installation
    pages/usage
    pages/admin
-
+   pages/sitemaps
 
 
 Indices and tables

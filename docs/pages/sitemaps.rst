@@ -1,0 +1,6 @@
+#######
+Sitemap
+#######
+
+.. automodule:: mininews.sitemaps
+
