@@ -12,7 +12,7 @@
                 <div class="label label-warning">{{ article.status|capfirst }} preview</div>
             {% endif %}
             <article class="news_article">{{ article.body|safe|linebreaksbr }}</article>
-            <a href="/news/" class="btn btn-default">View all articles</a>
+            <a href="{% url 'news:article_archive' %}" class="btn btn-default">View all articles</a>
         </div>
     </div>
 {% endblock content %}

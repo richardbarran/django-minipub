@@ -16,4 +16,4 @@ class Article(MininewsModel):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('article_detail', kwargs={'slug': self.slug})
+        return reverse('news:article_detail', kwargs={'slug': self.slug})

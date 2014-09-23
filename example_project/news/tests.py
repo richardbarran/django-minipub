@@ -101,7 +101,7 @@ class ArticleModelTest(TestCase):
 
 class ArticleListTest(TestCase):
 
-    """The landing page has a (paginated) list of all articles."""
+    """The landing page has a list of all articles."""
 
     def setUp(self):
 

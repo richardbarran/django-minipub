@@ -7,10 +7,11 @@ from news.sitemaps import NewsSitemap
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^news/', include('news.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', TemplateView.as_view(template_name="homepage.html"), name='homepage'),
-)
+                       url(r'^news/', include('news.urls', namespace='news')),
+                       url(r'^admin/', include(admin.site.urls)),
+                       url(r'^$', TemplateView.as_view(
+                           template_name="homepage.html"), name='homepage'),
+                       )
 
 urlpatterns += patterns(
     '',
