@@ -7,5 +7,7 @@ $(document).ready(function() {
 		$('ul.navbar-nav li.home').addClass('active');
 	} else if (path.substring(0, 6) == '/news/') {
 		$('ul.navbar-nav li.news').addClass('active');
+	} else if (path.substring(0, 19) == '/news_with_archive/') {
+		$('ul.navbar-nav li.news_with_archive').addClass('active');
 	}
 })

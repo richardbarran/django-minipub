@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}News{% endblock title %}
+
+{% block page_title %}News{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12">
+		    {% for article in article_list %}
+                <div>
+                    <h2>
+                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                    </h2>
+                    <em>{{ article.start|default:"No start date set" }}</em>
+                    {% if article.staff_preview %}
+                        <div class="label label-warning">{{ article.status|capfirst }} preview</div>
+                    {% endif %}
+                    <div class="news_teaser">{{ article.body|safe|linebreaksbr|truncatewords_html:20 }}</div>
+                    <a href="{{ article.get_absolute_url }}" class="btn btn-default btn-sm">Read more</a>
+	            </div>
+		    {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}
+
+
