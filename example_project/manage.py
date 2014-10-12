@@ -3,9 +3,9 @@ import os
 import sys
 
 if __name__ == "__main__":
-    # Need to add mininews itself to the import path.
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    sys.path.append(os.path.join(BASE_DIR, ".."))
+    # Add parent folder to path so that we can import Mininews itself.
+    PROJECT_PATH = os.path.abspath(os.path.split(__file__)[0])
+    sys.path.append(os.path.join(PROJECT_PATH, ".."))
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "example_project.settings")
 
