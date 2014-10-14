@@ -35,7 +35,7 @@ class ArticleModelTest(TestCase):
         self.article1 = ArticleFactory(title='Some news about me')
 
     def test_status(self):
-        """Only published articles should be seen."""
+        """Only live articles should be seen."""
 
         # By default the factory publishes articles.
         self.assertQuerysetEqual(Article.objects.live().all(),
@@ -281,8 +281,8 @@ class ArticleDetailTest(TestCase):
         self.assertEqual(response.context['article'], self.article1)
         self.assertContains(response, self.article1.title)
 
-    def test_published(self):
-        """Articles that are not published cannot be seen."""
+    def test_live(self):
+        """Articles that are not live cannot be seen."""
 
         self.article1.status = Article.STATUS.draft
         self.article1.save()
@@ -290,8 +290,8 @@ class ArticleDetailTest(TestCase):
         response = self.client.get('/news/some-news-about-me/')
         self.assertEqual(response.status_code, 404)
 
-    def test_published_staff(self):
-        """Staff members can see articles that are not published."""
+    def test_live_staff(self):
+        """Staff members can see articles that are not live."""
 
         self.article1.status = Article.STATUS.draft
         self.article1.save()

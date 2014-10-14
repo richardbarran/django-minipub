@@ -4,6 +4,7 @@ Changelog
 0.4 (unreleased)
 ----------------
 
+- Better handling of when we have more statuses than just 'draft' and 'published'.
 - Removed pagination: it's not Mininews' job to control this.
 - Do not set 'allow_empty': leave that to the end-user project.
 - Do not set 'make_object_list': leave that to the end-user project.

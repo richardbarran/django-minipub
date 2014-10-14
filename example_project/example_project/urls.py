@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 
 from news.sitemaps import NewsSitemap
+from news_with_archive.sitemaps import NewsPublishedSitemap, NewsArchivedSitemap
 
 admin.autodiscover()
 
@@ -18,5 +19,7 @@ urlpatterns = patterns('',
 urlpatterns += patterns(
     '',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
-        {'sitemaps': {'news': NewsSitemap}}),
+        {'sitemaps': {'news': NewsSitemap,
+                      'published': NewsPublishedSitemap,
+                      'archived': NewsArchivedSitemap}}),
 )

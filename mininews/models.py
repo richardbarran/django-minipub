@@ -33,28 +33,67 @@ or
 Refining the concept of a 'Live' object
 ---------------------------------------
 
-Imagine that your articles can be ``published``,
-but that at some point in time you will want to manually move them to an 'archived'
-section in the website.
+Let's imagine that your articles can be ``published``, but that at some point in time you will want
+to manually move them to an 'archived' section in the website.
 
-In your article model (that inherits from ``MininewsModel``) you would define::
+Models
+~~~~~~
+First, you will define in your model the complete list of statuses available:
 
-    STATUS = Choices('draft', 'published', 'archived')    
+.. code-block:: python
 
-Then the notion of 'live' will depend if you are in the section of the site that
-shows the ``published`` articles, or in the section that shows the ``archived`` articles.
+    class MyCustomModel(MininewsModel):
 
-You would have in your ``views.py`` 2 sets of views:
+        STATUS = Choices('draft', 'published', 'archived')
 
-- for the main pages.
-- for the archived pages.
+And you'll also tweak your ``get_absolute_url()`` to handle the new options:
 
-In each of these you would define what status (or statuses) make an article 'live'.
+.. code-block:: python
 
-``live()`` take one optional argument: ``statuses``. This is for when you change
-the list of status choices; for example...
+    def get_absolute_url(self):
+        if self.status == self.STATUS.archived:
+            return reverse('the_url_for_the_archived_page', kwargs={'slug': self.slug})
+        else:
+            return reverse('the_url_for_the_published_page', kwargs={'slug': self.slug})
 
+Views
+~~~~~
+Secondly, in your ``views.py`` you will have 2 sets of views:
 
+- the views for the main pages.
+- the views for the archived pages.
+
+And the urls would look something like::
+
+    /news/
+    /news/<article slug>/
+    /archives/
+    /archives/<article slug>/
+
+In the views, you will split out the articles to be displayed in the main section:
+
+.. code-block:: python
+
+    class ArticleDetailView(MininewsDetailView):
+        model = Article
+        context_object_name = 'article'
+        mininews_live = ('published',)
+
+And then the articles to show in the archives section:
+
+.. code-block:: python
+
+    class ArticleArchivesDetailView(MininewsDetailView):
+        model = Article
+        context_object_name = 'article'
+        mininews_live = ('archived',)
+
+We have added a new attribute - ``mininews_live``. This will override the ``STATUS`` defined
+on the model.
+
+Sitemaps
+~~~~~~~~
+If you have defined a sitemap.xml, refer also to the :ref:`sitemaps page<sitemaps-label>`.
 
 """
 
