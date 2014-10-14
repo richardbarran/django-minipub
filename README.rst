@@ -45,6 +45,13 @@ Here are some examples of Mininews at work:
 - `Controlling the publication of the Events at a well-known racetrack <http://www.silverstone.co.uk/events/>`_.
 - `Controlling when job offers are displayed <http://www.ipglobal-ltd.com/en/about/careers/>`_.
 
+Alternatives
+------------
+This is a very basic publication control tool, but works well on several production 
+websites. There are several similar projects that take slightly different approaches 
+to publication control; usually they introduce more sophisticated control. A well-known
+example is `django-reversion <https://github.com/etianen/django-reversion>`_.
+
 Installation and usage
 ----------------------
 .. image:: https://readthedocs.org/projects/django-mininews/badge/?version=latest
