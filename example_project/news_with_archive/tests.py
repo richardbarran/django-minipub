@@ -15,6 +15,34 @@ the ArticleDetail view, so we just test that.
 
 """
 
+class ArticleModelTest(TestCase):
+
+    """Various tests on the Article model."""
+
+    def test_default_start(self):
+        """Set a default value for the start date."""
+
+        # Should set a date when status goes to published.
+        article1 = ArticleFactory(start=None, status=Article.STATUS.draft)
+        article1.save()
+
+        self.assertEqual(article1.start, None)
+
+        article1.status = Article.STATUS.published
+        article1.save()
+
+        self.assertNotEqual(article1.start, None)
+
+        # Should also set a date when status goes to archived.
+        article2 = ArticleFactory(start=None, status=Article.STATUS.draft)
+        article2.save()
+
+        self.assertEqual(article2.start, None)
+
+        article2.status = Article.STATUS.archived
+        article2.save()
+
+        self.assertNotEqual(article2.start, None)
 
 class ArticleDetailTest(TestCase):
 

@@ -112,13 +112,8 @@ from .managers import MininewsQuerySet
 
 class MininewsModel(StatusModel, TimeStampedModel):
 
-    # TODO: add a property to the model so that in the template we can
-    # highlight not-live articles.
-
     STATUS = Choices('draft', 'published')
 
-    # TODO: start is a required field when published, as it is used for sorting the articles in
-    # the archive views.
     start = models.DateField('start date', null=True, blank=True)
     end = models.DateField('end date', null=True, blank=True)
 
@@ -128,9 +123,8 @@ class MininewsModel(StatusModel, TimeStampedModel):
         abstract = True
 
     def save(self, *args, **kwargs):
-        """Set the publication date for published items if it hasn't been set already."""
-        # TODO: if an article is set to 'archived' it should also trigger the start date.
-        if self.status == self.STATUS.published and self.start is None:
+        """Set the start date for non-draft items if it hasn't been set already."""
+        if self.status != self.STATUS.draft and self.start is None:
             self.start = datetime.date.today()
         super(MininewsModel, self).save(*args, **kwargs)
 
@@ -140,7 +134,6 @@ class MininewsModel(StatusModel, TimeStampedModel):
             raise ValidationError('The end date cannot be before the start date.')
 
     def live(self, statuses=['published']):
-        # TODO: an object cannot be 'live' if its start date is not set.
         if not self.status in statuses:
             return False
         if self.start and self.start > datetime.date.today():
