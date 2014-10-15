@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4 (unreleased)
+0.4 (2014-10-15)
 ----------------
 
 - Better handling of when we have more statuses than just 'draft' and 'published'.
