@@ -32,7 +32,15 @@
 		    <ul class="nav navbar-nav">
 			    <li class="home"><a href="/">Home</a></li>
 			    <li class="news"><a href="{% url 'news:article_archive' %}">News</a></li>
-			    <li class="news_with_archive"><a href="{% url 'news_with_archive:article_archive' %}">News with archive</a></li>
+			    <li class="news_with_archive dropdown">
+					<a data-target="#" href="" class="dropdown-toggle" data-toggle="dropdown">
+			            News with archives<b class="caret"></b>
+			        </a>
+					<ul class="dropdown-menu">
+						<li class="sub-page"><a href="{% url 'news_with_archive:article_archive' %}">Published</a></li>
+						<li class="sub-page"><a href="{% url 'news_with_archive:article_archived_archive' %}">Archived</a></li>
+					</ul>
+				</li>
 		    </ul>
 		  </div><!-- /.navbar-collapse -->
 		</nav>
