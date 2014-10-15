@@ -15,6 +15,7 @@ class ArticleDetailView(MininewsDetailView):
     context_object_name = 'article'
     mininews_live = ('published',)
 
+
 class ArticleArchivedArchiveView(MininewsArchiveIndexView):
     model = Article
     context_object_name = 'article_list'

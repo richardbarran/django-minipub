@@ -10,10 +10,11 @@ from .models import Article
 """
 Tests for the `mininews_live` attribute.
 
-Note that we do not run test for the List views - the get_queryset() method is the same as for 
+Note that we do not run test for the List views - the get_queryset() method is the same as for
 the ArticleDetail view, so we just test that.
 
 """
+
 
 class ArticleModelTest(TestCase):
 
@@ -44,6 +45,7 @@ class ArticleModelTest(TestCase):
 
         self.assertNotEqual(article2.start, None)
 
+
 class ArticleDetailTest(TestCase):
 
     def setUp(self):
@@ -57,7 +59,6 @@ class ArticleDetailTest(TestCase):
 
         response = self.client.get('/news_with_archive/news/some-news-about-me/')
         self.assertEqual(response.status_code, 200)
-
 
     def test_published_other_status(self):
         """Articles that are not 'live' cannot be seen."""
@@ -76,7 +77,6 @@ class ArticleDetailTest(TestCase):
 
         response = self.client.get('/news_with_archive/archived/some-news-about-me/')
         self.assertEqual(response.status_code, 200)
-
 
     def test_archived_other_status(self):
         """Articles that are not 'live' cannot be seen."""
@@ -128,6 +128,7 @@ class ArticleDetailTest(TestCase):
         response = self.client.get('/news_with_archive/archived/some-news-about-me/')
         self.assertEqual(response.status_code, 404)
 
+
 class ArticleListTest(TestCase):
 
     """The landing page has a list of all articles."""
@@ -160,7 +161,6 @@ class ArticleListTest(TestCase):
         self.assertQuerysetEqual(response.context['article_list'],
                                  ['<Article: article 3>', '<Article: article 1>'])
 
-
     def test_urls(self):
         """Check the urls to the detail pages."""
 
@@ -168,16 +168,17 @@ class ArticleListTest(TestCase):
         response = self.client.get('/news_with_archive/news/')
 
         self.assertEqual(response.context['article_list'][0].get_absolute_url(),
-            '/news_with_archive/news/article-2/')
+                         '/news_with_archive/news/article-2/')
 
         # Show 'archived' articles.
         response = self.client.get('/news_with_archive/archived/')
         self.assertEqual(response.status_code, 200)
 
         self.assertEqual(response.context['article_list'][0].get_absolute_url(),
-            '/news_with_archive/archived/article-3/')
+                         '/news_with_archive/archived/article-3/')
         self.assertEqual(response.context['article_list'][1].get_absolute_url(),
-            '/news_with_archive/archived/article-1/')
+                         '/news_with_archive/archived/article-1/')
+
 
 class SitemapTest(TestCase):
 

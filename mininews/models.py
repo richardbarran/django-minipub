@@ -23,7 +23,7 @@ and as an instance method. For example, if you have an ``Article`` model that us
 .. code-block:: python
 
     my_articles = Article.objects.live()
-    
+
 or
 
 .. code-block:: python
@@ -133,7 +133,7 @@ class MininewsModel(StatusModel, TimeStampedModel):
             raise ValidationError('The end date cannot be before the start date.')
 
     def live(self, statuses=['published']):
-        if not self.status in statuses:
+        if self.status not in statuses:
             return False
         if self.start and self.start > datetime.date.today():
             return False
@@ -146,14 +146,14 @@ class MininewsModel(StatusModel, TimeStampedModel):
     def staff_preview(self):
         """Helper property - says if this object is being previewed by a member of staff.
 
-        Can be used when displaying objects in the website - members of staff will see all 
+        Can be used when displaying objects in the website - members of staff will see all
         objects, using this property in the template can help for attaching a message/custom
         CSS saying that this object is being previewed.
 
         For example, in the example_project we have this snippet:
 
         .. code-block:: django
-            
+
             {% if article.staff_preview %}
                 <div class="label label-warning">This is a preview</div>
             {% endif %}

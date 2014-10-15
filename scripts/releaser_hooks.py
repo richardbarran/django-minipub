@@ -12,4 +12,3 @@ def prereleaser_middle(data):
     print('Running PEP8 check.')
     # See setup.cfg for configuration options.
     subprocess.check_output(["pep8"])
-

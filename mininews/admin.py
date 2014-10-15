@@ -1,5 +1,5 @@
 """
-We have a ``MininewsAdmin`` class that basically gives you the code for displaying 2 
+We have a ``MininewsAdmin`` class that basically gives you the code for displaying 2
 fieldsets:
 
 #. The fieldset that controls publication:
@@ -15,11 +15,11 @@ And here is an example of using them:
 .. code-block:: python
 
     from mininews.admin import MininewsAdmin
-    
+
     class ArticleAdmin(MininewsAdmin):
-    
+
     # Other code...
-    
+
     fieldsets = (
         (None, {
             'fields': ('some', 'other', 'fields',)

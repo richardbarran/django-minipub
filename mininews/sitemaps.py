@@ -7,15 +7,15 @@ to make creating a sitemap easier.
 Here is an example of how to use it:
 
 .. code-block:: python
-    
+
     from mininews.sitemaps import MininewsSitemap
-    
+
     from .models import Article
-    
+
     class NewsSitemap(MininewsSitemap):
         model = Article
 
-Basically, all you'll need to do is set the model to use in the sitemap - in 
+Basically, all you'll need to do is set the model to use in the sitemap - in
 this example, it's ``Article``.
 
 If you have custom statuses...
@@ -27,11 +27,11 @@ You can add a ``mininews_live`` attribute to your sitemap class - exactly
 the same way as you will have done for your extra views. For example:
 
 .. code-block:: python
-    
+
     from mininews.sitemaps import MininewsSitemap
-    
+
     from .models import Article
-    
+
     class NewsArchivesSitemap(MininewsSitemap):
         """Sitemap for the archived articles."""
         model = Article

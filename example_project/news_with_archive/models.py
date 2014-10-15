@@ -20,7 +20,7 @@ class Article(MininewsModel):
         return self.title
 
     def get_absolute_url(self):
-    	if self.status == self.STATUS.archived:
-    		return reverse('news_with_archive:article_archived_detail', kwargs={'slug': self.slug})
-    	else:
-	        return reverse('news_with_archive:article_detail', kwargs={'slug': self.slug})
+        if self.status == self.STATUS.archived:
+            return reverse('news_with_archive:article_archived_detail', kwargs={'slug': self.slug})
+        else:
+            return reverse('news_with_archive:article_detail', kwargs={'slug': self.slug})

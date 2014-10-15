@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from .views import ArticleDetailView, ArticleArchiveView, ArticleArchivedArchiveView, \
-ArticleArchivedDetailView
+    ArticleArchivedDetailView
 
 urlpatterns = patterns('',
                        url(r'^news/$',
