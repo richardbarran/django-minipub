@@ -9,3 +9,7 @@ django_mininews.egg-info
 
 # Documentation
 docs/_build/*
+
+# Coverage
+example_project/coverage_html_report
+example_project/.coverage

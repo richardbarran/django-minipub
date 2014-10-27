@@ -22,7 +22,13 @@ matrix:
 install:
   - pip install $DJANGO
   - pip install factory-boy
+  - pip install coveralls
   - python setup.py develop
 
-script: cd example_project; python manage.py test
+script:
+  - cd example_project; coverage run manage.py test
+
+after_success:
+  - coveralls
+
 
