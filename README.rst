@@ -12,6 +12,9 @@ Django-mininews
 .. image:: https://travis-ci.org/richardbarran/django-mininews.svg?branch=master
     :target: https://travis-ci.org/richardbarran/django-mininews
 
+.. image:: https://coveralls.io/repos/richardbarran/django-mininews/badge.png?branch=master
+  :target: https://coveralls.io/r/richardbarran/django-mininews?branch=master
+
 Django-mininews is a basic tool for controlling the *publication* of objects.
 
 Let's take an example: you have a 'news' application, that just consists of a 
