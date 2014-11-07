@@ -12,9 +12,11 @@ Contents:
    :maxdepth: 2
 
    pages/installation
-   pages/usage
+   pages/models
+   pages/views
    pages/admin
    pages/sitemaps
+   pages/extra_statuses
 
 
 Indices and tables

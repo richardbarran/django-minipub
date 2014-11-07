@@ -1,3 +1,25 @@
+"""
+
+.. code-block:: python
+
+    from mininews.views import MininewsArchiveIndexView, MininewsYearArchiveView, MininewsDetailView
+
+    class ArticleArchiveView(MininewsArchiveIndexView):
+        ...
+
+Mininews provides a few basic views to get you started - but you are encouraged to look at the source
+code. The important thing to note is the ``GetQuerysetMixin`` mixin - you can use this with most
+of Django's List- and Detail- class based-views to easily integrate mininews.
+
+For example, in mininews' ``views.py``, here is the source code for defining a detail view:
+
+.. code-block:: python
+
+    class MininewsDetailView(GetQuerysetMixin, DetailView):
+        pass
+
+"""
+
 from django.views.generic.dates import ArchiveIndexView, YearArchiveView
 from django.views.generic import DetailView
 

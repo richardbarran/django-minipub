@@ -1,9 +1,7 @@
-##############
-Using Mininews
-##############
+##################
+The Mininews model
+##################
 
-The MininewsModel model
-=======================
 .. automodule:: mininews.models
 
 'staff_preview' property
