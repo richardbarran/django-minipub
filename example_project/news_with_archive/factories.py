@@ -7,7 +7,8 @@ from .models import Article
 
 class ArticleFactory(factory.django.DjangoModelFactory):
 
-    FACTORY_FOR = Article
+    class Meta:
+        model = Article
 
     # Create some dummy default values for the title (which has to be unique).
     title = factory.Sequence(lambda n: 'article{0:0>3}'.format(n))
