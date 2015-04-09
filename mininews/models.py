@@ -81,6 +81,7 @@ class MininewsModel(StatusModel, TimeStampedModel):
         super(MininewsModel, self).save(*args, **kwargs)
 
     def clean(self):
+        super(MininewsModel, self).clean()
         if self.start and self.end and self.start > self.end:
             raise ValidationError('The end date cannot be before the start date.')
 
