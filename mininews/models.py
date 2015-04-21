@@ -15,7 +15,7 @@
 
 Timestamps
 ----------
-``MininewsModel`` also adds the following fields that get auto-updated and should 
+``MininewsModel`` also adds the following fields that get auto-updated and should
 not be manually modified: ``created``, ``modified`` and ``status_changed``.
 
 The concept of 'Live' objects
@@ -40,7 +40,7 @@ or
 
 Extra statuses
 ~~~~~~~~~~~~~~
-Models can have more statuses than ``draft``, ``published`` - 
+Models can have more statuses than ``draft``, ``published`` -
 :ref:`see here for more details<extra_statuses-label>`.
 
 Sitemaps
