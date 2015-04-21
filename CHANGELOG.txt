@@ -4,8 +4,9 @@ Changelog
 0.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Play nice with other mixins' clean() methods.
+- Improved documentation.
+- Fixed some depreaction warnings.
 
 0.4 (2014-10-15)
 ----------------
