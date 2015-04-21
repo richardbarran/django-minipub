@@ -7,6 +7,7 @@ Changelog
 - Play nice with other mixins' clean() methods.
 - Improved documentation.
 - Fixed some depreaction warnings.
+- Upgraded versions of various third party packages.
 
 0.4 (2014-10-15)
 ----------------
