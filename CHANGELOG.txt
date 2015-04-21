@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5 (unreleased)
+0.5 (2015-04-21)
 ----------------
 
 - Play nice with other mixins' clean() methods.
