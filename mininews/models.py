@@ -55,7 +55,6 @@ from django.core.exceptions import ValidationError
 
 from model_utils.models import StatusModel, TimeStampedModel
 from model_utils import Choices
-from model_utils.managers import PassThroughManager
 
 import datetime
 
@@ -69,7 +68,7 @@ class MininewsModel(StatusModel, TimeStampedModel):
     start = models.DateField('start date', null=True, blank=True)
     end = models.DateField('end date', null=True, blank=True)
 
-    objects = PassThroughManager.for_queryset_class(MininewsQuerySet)()
+    objects = MininewsQuerySet.as_manager()
 
     class Meta:
         abstract = True
