@@ -4,7 +4,7 @@ Changelog
 0.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Dropped Django 1.4/1.6 and added support for Django 1.8.
 
 
 0.5 (2015-04-21)
@@ -12,7 +12,7 @@ Changelog
 
 - Play nice with other mixins' clean() methods.
 - Improved documentation.
-- Fixed some depreaction warnings.
+- Fixed some deprecation warnings.
 - Upgraded versions of various third party packages.
 
 0.4 (2014-10-15)
