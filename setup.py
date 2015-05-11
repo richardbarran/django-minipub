@@ -1,17 +1,19 @@
 #/usr/bin/env python
 
-import os
+import uuid
 from setuptools import setup, find_packages
+from pip.req import parse_requirements
 
 import mininews
 
-ROOT_DIR = os.path.dirname(__file__)
 
-
-def get_requirements(requirements_file):
-    with open(requirements_file) as f:
-        required = [line.split('#')[0] for line in f.read().splitlines()]
-    return required
+def get_requirements(source):
+    try:
+        install_reqs = parse_requirements(source, session=uuid.uuid1())
+    except TypeError:
+        # Older version of pip.
+        install_reqs = parse_requirements(source)
+    return set([str(ir.req) for ir in install_reqs])
 
 setup(
     name='django-mininews',
@@ -21,7 +23,7 @@ setup(
     license='MIT',
     description='Boilerplate for creating publishable lists of objects',
     long_description=open('README.rst').read(),
-    install_requires=get_requirements(os.path.join(ROOT_DIR, 'requirements.txt')),
+    install_requires=get_requirements('requirements.txt'),
     url='https://github.com/richardbarran/django-mininews',
     author='Richard Barran',
     author_email='richard@arbee-design.co.uk',
