@@ -1,12 +1,12 @@
 Django-mininews
 ===============
 
-.. image:: https://pypip.in/v/django-mininews/badge.png
-    :target: https://crate.io/packages/django-mininews/
+.. image:: https://img.shields.io/pypi/v/django-mininews.svg
+    :target: https://pypi.python.org/pypi/django-mininews/
     :alt: Latest PyPI version
 
-.. image:: https://pypip.in/d/django-mininews/badge.png
-    :target: https://crate.io/packages/django-mininews/
+.. image:: https://img.shields.io/pypi/dm/django-mininews.svg
+    :target: https://pypi.python.org/pypi/django-mininews/
     :alt: Number of PyPI downloads
 
 .. image:: https://travis-ci.org/richardbarran/django-mininews.svg?branch=master
