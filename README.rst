@@ -15,21 +15,21 @@ Django-mininews
 .. image:: https://coveralls.io/repos/richardbarran/django-mininews/badge.png?branch=master
   :target: https://coveralls.io/r/richardbarran/django-mininews?branch=master
 
-Django-mininews is a basic tool for controlling the *publication* of objects.
+Django-mininews is just a Django Model Mixin for controlling the *publication* of objects.
 
-Let's take an example: you have a 'news' application, that just consists of a 
+Let's take an example: you have a 'news' application, with an 
 Article model. In the admin interface, mininews will add this fieldset:
 
 .. image:: docs/img/mininews-fieldset.png
 
-All articles will have the following 3 fields:
+All articles will then have the following 3 fields:
 
 - status: usually 'draft' or 'published'.
-- start: start date, defaults to whenever the status is changed to ``published``.
+- start: start date.
 - end: end date; optional.
 
-Articles can only be viewed in the public website **if** they are ``published``
-**and** between the start and end dates.
+Articles will only be visible in the public website **if** they are ``published``
+**and** today's date is between the start and end dates.
 
 In addition, we have a fieldset for showing various read-only status fields:
 
