@@ -15,7 +15,7 @@ Django-mininews
 .. image:: https://coveralls.io/repos/richardbarran/django-mininews/badge.png?branch=master
   :target: https://coveralls.io/r/richardbarran/django-mininews?branch=master
 
-Django-mininews is just a Django Model Mixin for controlling the *publication* of objects.
+Django-mininews is a simple Django Model Mixin for controlling the *publication* of objects.
 
 Let's take an example: you have a 'news' application, with an 
 Article model. In the admin interface, mininews will add this fieldset:
@@ -24,7 +24,7 @@ Article model. In the admin interface, mininews will add this fieldset:
 
 All articles will then have the following 3 fields:
 
-- status: usually 'draft' or 'published'.
+- status: usually ``draft`` or ``published``.
 - start: start date.
 - end: end date; optional.
 
@@ -37,8 +37,8 @@ In addition, we have a fieldset for showing various read-only status fields:
 
 These can be of use for tracking changes to an Article.
 
-And that's it... Mininews is just an abstract Model, together with plenty of code - in the models,
-views, admin and sitemap - to make the best use of it, that you will reuse 
+And that's it... Mininews is just a few fields on a Model Mixin, together with plenty of code - in the models,
+views, admin and sitemap - to make the best use of it, that you will hopefully reuse 
 again and again throughout a project.
 
 What can I use it for?
