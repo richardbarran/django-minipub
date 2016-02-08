@@ -15,6 +15,7 @@
 
 import sys
 import os
+import django
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -22,6 +23,7 @@ import os
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.append('../example_project/')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'example_project.settings'
+django.setup()
 
 # -- General configuration ------------------------------------------------
 
@@ -49,7 +51,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Django-minipub'
-copyright = '2015, Richard Barran'
+copyright = '2016, Richard Barran'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
