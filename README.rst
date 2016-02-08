@@ -15,7 +15,7 @@ Django-minipub
 .. image:: https://coveralls.io/repos/richardbarran/django-minipub/badge.png?branch=master
   :target: https://coveralls.io/r/richardbarran/django-minipub?branch=master
 
-Django-minipub is a **mini**malist **pub**lication control system for Django.
+Django-minipub is a **mini**-malist **pub**-lication control system for Django.
 
 Let's take an example: you have a 'news' application, with an 
 Article model. In the admin interface, minipub will add this fieldset:
