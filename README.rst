@@ -12,8 +12,8 @@ Django-minipub
 .. image:: https://travis-ci.org/richardbarran/django-minipub.svg?branch=master
     :target: https://travis-ci.org/richardbarran/django-minipub
 
-.. image:: https://coveralls.io/repos/richardbarran/django-minipub/badge.png?branch=master
-  :target: https://coveralls.io/r/richardbarran/django-minipub?branch=master
+.. image:: https://coveralls.io/repos/github/richardbarran/django-minipub/badge.svg?branch=master
+    :target: https://coveralls.io/github/richardbarran/django-minipub?branch=master 
 
 Django-minipub is a **mini**-malist **pub**-lication control system for Django.
 
