@@ -1,5 +1,5 @@
 [run]
-source = mininews
+source = minipub
 
 [report]
 ignore_errors = True
