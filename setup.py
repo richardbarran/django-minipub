@@ -4,7 +4,7 @@ import uuid
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
-import mininews
+import minipub
 
 
 def get_requirements(source):
@@ -16,15 +16,15 @@ def get_requirements(source):
     return set([str(ir.req) for ir in install_reqs])
 
 setup(
-    name='django-mininews',
-    version=mininews.__version__,
+    name='django-minipub',
+    version=minipub.__version__,
     packages=find_packages(exclude=['example_project']),
     include_package_data=True,
     license='MIT',
     description='Boilerplate for creating publishable lists of objects',
     long_description=open('README.rst').read(),
     install_requires=get_requirements('requirements.txt'),
-    url='https://github.com/richardbarran/django-mininews',
+    url='https://github.com/richardbarran/django-minipub',
     author='Richard Barran',
     author_email='richard@arbee-design.co.uk',
     classifiers=[

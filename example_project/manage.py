@@ -3,7 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
-    # Add parent folder to path so that we can import Mininews itself.
+    # Add parent folder to path so that we can import Minipub itself.
     PROJECT_PATH = os.path.abspath(os.path.split(__file__)[0])
     sys.path.append(os.path.join(PROJECT_PATH, ".."))
 

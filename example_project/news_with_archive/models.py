@@ -4,11 +4,11 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from model_utils import Choices
 
-from mininews.models import MininewsModel
+from minipub.models import MinipubModel
 
 
 @python_2_unicode_compatible
-class Article(MininewsModel):
+class Article(MinipubModel):
 
     STATUS = Choices('draft', 'published', 'archived')
 

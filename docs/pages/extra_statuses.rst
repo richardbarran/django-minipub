@@ -12,7 +12,7 @@ First, you will define in your model the complete list of statuses available:
 
 .. code-block:: python
 
-    class MyCustomModel(MininewsModel):
+    class MyCustomModel(MinipubModel):
 
         STATUS = Choices('draft', 'published', 'archived')
 
@@ -44,19 +44,19 @@ In the views, you will split out the articles to be displayed in the main sectio
 
 .. code-block:: python
 
-    class ArticleDetailView(MininewsDetailView):
+    class ArticleDetailView(MinipubDetailView):
         model = Article
         context_object_name = 'article'
-        mininews_live = ('published',)
+        minipub_live = ('published',)
 
 And then the articles to show in the archives section:
 
 .. code-block:: python
 
-    class ArticleArchivesDetailView(MininewsDetailView):
+    class ArticleArchivesDetailView(MinipubDetailView):
         model = Article
         context_object_name = 'article'
-        mininews_live = ('archived',)
+        minipub_live = ('archived',)
 
-We have added a new attribute - ``mininews_live``. This will override the ``STATUS`` defined
+We have added a new attribute - ``minipub_live``. This will override the ``STATUS`` defined
 on the model.

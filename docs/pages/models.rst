@@ -1,10 +1,10 @@
 ##################
-The Mininews model
+The Minipub model
 ##################
 
-.. automodule:: mininews.models
+.. automodule:: minipub.models
 
 'staff_preview' property
 ------------------------
-.. automethod:: mininews.models.MininewsModel.staff_preview()
+.. automethod:: minipub.models.MinipubModel.staff_preview()
 

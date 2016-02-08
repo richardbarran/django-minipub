@@ -1,29 +1,29 @@
-from mininews.views import MininewsArchiveIndexView, MininewsDetailView
+from minipub.views import MinipubArchiveIndexView, MinipubDetailView
 
 from .models import Article
 
 
-class ArticleArchiveView(MininewsArchiveIndexView):
+class ArticleArchiveView(MinipubArchiveIndexView):
     model = Article
     context_object_name = 'article_list'
     allow_empty = True
-    mininews_live = ('published',)
+    minipub_live = ('published',)
 
 
-class ArticleDetailView(MininewsDetailView):
+class ArticleDetailView(MinipubDetailView):
     model = Article
     context_object_name = 'article'
-    mininews_live = ('published',)
+    minipub_live = ('published',)
 
 
-class ArticleArchivedArchiveView(MininewsArchiveIndexView):
+class ArticleArchivedArchiveView(MinipubArchiveIndexView):
     model = Article
     context_object_name = 'article_list'
     allow_empty = True
-    mininews_live = ('archived',)
+    minipub_live = ('archived',)
 
 
-class ArticleArchivedDetailView(MininewsDetailView):
+class ArticleArchivedDetailView(MinipubDetailView):
     model = Article
     context_object_name = 'article'
-    mininews_live = ('archived',)
+    minipub_live = ('archived',)

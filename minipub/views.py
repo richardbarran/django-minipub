@@ -2,20 +2,20 @@
 
 .. code-block:: python
 
-    from mininews.views import MininewsArchiveIndexView, MininewsYearArchiveView, MininewsDetailView
+    from minipub.views import MinipubArchiveIndexView, MinipubYearArchiveView, MinipubDetailView
 
-    class ArticleArchiveView(MininewsArchiveIndexView):
+    class ArticleArchiveView(MinipubArchiveIndexView):
         ...
 
-Mininews provides a few basic views to get you started - but you are encouraged to look at the source
+Minipub provides a few basic views to get you started - but you are encouraged to look at the source
 code. The important thing to note is the ``GetQuerysetMixin`` mixin - you can use this with most
-of Django's List- and Detail- class based-views to easily integrate mininews.
+of Django's List- and Detail- class based-views to easily integrate minipub.
 
-For example, in mininews' ``views.py``, here is the source code for defining a detail view:
+For example, in minipub' ``views.py``, here is the source code for defining a detail view:
 
 .. code-block:: python
 
-    class MininewsDetailView(GetQuerysetMixin, DetailView):
+    class MinipubDetailView(GetQuerysetMixin, DetailView):
         pass
 
 """
@@ -26,7 +26,7 @@ from django.views.generic import DetailView
 
 class GetQuerysetMixin(object):
 
-    mininews_live = ('published',)
+    minipub_live = ('published',)
 
     def get_queryset(self):
         qs = super(GetQuerysetMixin, self).get_queryset()
@@ -36,18 +36,18 @@ class GetQuerysetMixin(object):
         # archived. In this case, we only want the show the status that is applicable to
         # this page, *plus* the draft status.
         if self.request.user.is_authenticated() and self.request.user.is_staff:
-            staff_statuses = self.mininews_live + (self.model.STATUS.draft,)
+            staff_statuses = self.minipub_live + (self.model.STATUS.draft,)
             return qs.filter(status__in=staff_statuses)
-        return qs.live(statuses=self.mininews_live)
+        return qs.live(statuses=self.minipub_live)
 
 
-class MininewsArchiveIndexView(GetQuerysetMixin, ArchiveIndexView):
+class MinipubArchiveIndexView(GetQuerysetMixin, ArchiveIndexView):
     date_field = 'start'
 
 
-class MininewsYearArchiveView(GetQuerysetMixin, YearArchiveView):
+class MinipubYearArchiveView(GetQuerysetMixin, YearArchiveView):
     date_field = 'start'
 
 
-class MininewsDetailView(GetQuerysetMixin, DetailView):
+class MinipubDetailView(GetQuerysetMixin, DetailView):
     pass

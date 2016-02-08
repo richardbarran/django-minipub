@@ -2,5 +2,5 @@
 Admin
 #####
 
-.. automodule:: mininews.admin
+.. automodule:: minipub.admin
 

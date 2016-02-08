@@ -1,12 +1,12 @@
-from mininews.sitemaps import MininewsSitemap
+from minipub.sitemaps import MinipubSitemap
 
 from .models import Article
 
 
-class NewsPublishedSitemap(MininewsSitemap):
+class NewsPublishedSitemap(MinipubSitemap):
     model = Article
 
 
-class NewsArchivedSitemap(MininewsSitemap):
+class NewsArchivedSitemap(MinipubSitemap):
     model = Article
-    mininews_live = ('archived',)
+    minipub_live = ('archived',)

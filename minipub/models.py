@@ -2,12 +2,12 @@
 
 .. code-block:: python
 
-    from mininews.models import MininewsModel
+    from minipub.models import MinipubModel
 
-    class Article(MininewsModel):
+    class Article(MinipubModel):
         ...
 
-``MininewsModel`` is an abstract model that provides the following 3 fields:
+``MinipubModel`` is an abstract model that provides the following 3 fields:
 
 - ``status``: a list of choices; default is 'draft' or 'published'.
 - ``start``: a start date; defaults to date of publication.
@@ -15,7 +15,7 @@
 
 Timestamps
 ----------
-``MininewsModel`` also adds the following fields that get auto-updated and should
+``MinipubModel`` also adds the following fields that get auto-updated and should
 not be manually modified: ``created``, ``modified`` and ``status_changed``.
 
 The concept of 'Live' objects
@@ -26,7 +26,7 @@ Objects are usually considered 'live' **if** they are 'published'
 to display in the public website.
 
 ``live()`` methods are available both as a chainable filter on a queryset,
-and as an instance method. For example, if you have an ``Article`` model that uses ``MininewsModel``:
+and as an instance method. For example, if you have an ``Article`` model that uses ``MinipubModel``:
 
 .. code-block:: python
 
@@ -58,17 +58,17 @@ from model_utils import Choices
 
 import datetime
 
-from .managers import MininewsQuerySet
+from .managers import MinipubQuerySet
 
 
-class MininewsModel(StatusModel, TimeStampedModel):
+class MinipubModel(StatusModel, TimeStampedModel):
 
     STATUS = Choices('draft', 'published')
 
     start = models.DateField('start date', null=True, blank=True)
     end = models.DateField('end date', null=True, blank=True)
 
-    objects = MininewsQuerySet.as_manager()
+    objects = MinipubQuerySet.as_manager()
 
     class Meta:
         abstract = True
@@ -77,10 +77,10 @@ class MininewsModel(StatusModel, TimeStampedModel):
         """Set the start date for non-draft items if it hasn't been set already."""
         if self.status != self.STATUS.draft and self.start is None:
             self.start = datetime.date.today()
-        super(MininewsModel, self).save(*args, **kwargs)
+        super(MinipubModel, self).save(*args, **kwargs)
 
     def clean(self):
-        super(MininewsModel, self).clean()
+        super(MinipubModel, self).clean()
         if self.start and self.end and self.start > self.end:
             raise ValidationError('The end date cannot be before the start date.')
 

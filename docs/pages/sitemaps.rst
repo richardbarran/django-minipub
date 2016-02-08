@@ -2,5 +2,5 @@
 Sitemap
 #######
 
-.. automodule:: mininews.sitemaps
+.. automodule:: minipub.sitemaps
 

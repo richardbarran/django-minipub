@@ -4,7 +4,7 @@ from django.db.models import Q
 import datetime
 
 
-class MininewsQuerySet(QuerySet):
+class MinipubQuerySet(QuerySet):
 
     def live(self, statuses=['published']):
         today = datetime.date.today()

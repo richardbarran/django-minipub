@@ -8,7 +8,7 @@ from .models import Article
 
 
 """
-Tests for the `mininews_live` attribute.
+Tests for the `minipub_live` attribute.
 
 Note that we do not run test for the List views - the get_queryset() method is the same as for
 the ArticleDetail view, so we just test that.

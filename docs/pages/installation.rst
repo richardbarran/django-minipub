@@ -5,14 +5,14 @@ Installation & configuration
 
 Installation
 ------------
-The easiest way to install Mininews is to get the latest version from `PyPi <https://pypi.python.org/pypi>`_::
+The easiest way to install Minipub is to get the latest version from `PyPi <https://pypi.python.org/pypi>`_::
 
-    pip install django-mininews
+    pip install django-minipub
 
 You can also live dangerously and install the latest code directly from the
 Github repository::
 
-    pip install -e git+https://github.com/richardbarran/django-mininews.git#egg=django-mininews
+    pip install -e git+https://github.com/richardbarran/django-minipub.git#egg=django-minipub
 
 This code should work ok - like `Django <https://www.djangoproject.com/>`_
 itself, the master branch should be bug-free. Note however that you will get far better support
@@ -30,11 +30,11 @@ The following dependencies will be installed automatically if required:
 Configure Your Django Settings
 ------------------------------
 
-Add ``mininews`` to your ``INSTALLED_APPS`` setting::
+Add ``minipub`` to your ``INSTALLED_APPS`` setting::
 
     INSTALLED_APPS = (
          # ...other installed applications,
-         'mininews',
+         'minipub',
     )
 
-You are now ready to use mininews in your code.
+You are now ready to use minipub in your code.

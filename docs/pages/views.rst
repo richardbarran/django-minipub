@@ -1,5 +1,5 @@
 ##############
-Mininews views
+Minipub views
 ##############
 
-.. automodule:: mininews.views
+.. automodule:: minipub.views

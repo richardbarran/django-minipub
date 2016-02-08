@@ -8,11 +8,11 @@ from .models import Article
 import datetime
 
 """
-Welcome... here are all the tests for the mininews application.
+Welcome... here are all the tests for the minipub application.
 
-mininews models are all abstract, and no urls.py is defined by default, so testing
+minipub models are all abstract, and no urls.py is defined by default, so testing
 is a bit tricky. So instead we test this news app which implements all the
-mininews functionality.
+minipub functionality.
 
 Use of factory-boy
 ------------------

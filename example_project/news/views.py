@@ -1,10 +1,10 @@
-from mininews.views import MininewsArchiveIndexView, MininewsYearArchiveView, \
-    MininewsDetailView
+from minipub.views import MinipubArchiveIndexView, MinipubYearArchiveView, \
+    MinipubDetailView
 
 from .models import Article
 
 
-class ArticleArchiveView(MininewsArchiveIndexView):
+class ArticleArchiveView(MinipubArchiveIndexView):
     model = Article
     context_object_name = 'article_list'
     # Display page even if no content; this is convenience as in practice the
@@ -13,7 +13,7 @@ class ArticleArchiveView(MininewsArchiveIndexView):
     allow_empty = True
 
 
-class ArticleYearArchiveView(MininewsYearArchiveView):
+class ArticleYearArchiveView(MinipubYearArchiveView):
     model = Article
     context_object_name = 'article_list'
     date_list_period = 'year'
@@ -32,6 +32,6 @@ class ArticleYearArchiveView(MininewsYearArchiveView):
         return context
 
 
-class ArticleDetailView(MininewsDetailView):
+class ArticleDetailView(MinipubDetailView):
     model = Article
     context_object_name = 'article'

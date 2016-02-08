@@ -1,10 +1,14 @@
 Changelog
 =========
 
-0.7 (unreleased)
+1.0 (unreleased)
 ----------------
 
-- Nothing changed yet.
+BACKWARDS INCOMPATIBLE CHANGES:
+"Why is it called mininews, when it's a publication control system?". Good point. So I renamed the entire project
+from django-mininews to django-minipub, and bumped the version to 1.0 to warn that big changes were to be expected!
+
+- Changed project name to django-minipub.
 
 
 0.6.1 (2015-05-11)

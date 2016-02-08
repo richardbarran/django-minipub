@@ -1,7 +1,7 @@
-from mininews.sitemaps import MininewsSitemap
+from minipub.sitemaps import MinipubSitemap
 
 from .models import Article
 
 
-class NewsSitemap(MininewsSitemap):
+class NewsSitemap(MinipubSitemap):
     model = Article
