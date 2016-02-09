@@ -13,7 +13,7 @@ env:
  
 matrix:
   exclude:
-    - env: DJANGO="Django==1.9"
+    - env: DJANGO="Django==1.9.2"
       python: 3.3
 
 install:
