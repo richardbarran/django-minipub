@@ -5,7 +5,7 @@
 db.sqlite3
 
 # Package builds
-django_mininews.egg-info
+django_minipub.egg-info
 
 # Documentation
 docs/_build/*
