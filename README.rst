@@ -17,8 +17,8 @@ Django-minipub
 
 Django-minipub is a **mini**-malist **pub**-lication control system for Django.
 
-Let's take an example: you have a 'news' application, with an 
-Article model. In the admin interface, minipub will add this fieldset:
+Let's explain it with an example: you have a 'news' application, with an 
+Article model. In the admin interface, Minipub will add this fieldset:
 
 .. image:: docs/img/minipub-fieldset.png
 
@@ -37,7 +37,7 @@ In addition, we have a fieldset for showing various read-only status fields:
 
 These can be of use for tracking changes to an Article.
 
-And that's it... Minipub is just a few fields on a Model Mixin, together with plenty of code - in the models,
+And that's it... Minipub is simply a few fields on a Model Mixin, together with plenty of code - in the models,
 views, admin and sitemap - to make the best use of it, that you will hopefully reuse 
 again and again throughout a project.
 
@@ -45,9 +45,9 @@ What can I use it for?
 ----------------------
 Here are some examples of Minipub at work:
 
-- `Minutes of the meetings of an association <http://www.saphra.org.uk/meetings/>`_.
-- `Controlling the publication of the Events at a well-known racetrack <http://www.silverstone.co.uk/events/>`_.
+- `Controlling the publication of the Events for a F1 racetrack <http://www.silverstone.co.uk/events/>`_.
 - `Controlling when job offers are displayed <http://www.ipglobal-ltd.com/en/about/careers/>`_.
+- `Minutes of the meetings of a residents association website <http://www.saphra.org.uk/meetings/>`_.
 
 Alternatives
 ------------
