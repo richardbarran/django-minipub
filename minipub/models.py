@@ -52,6 +52,7 @@ If you have defined a sitemap.xml, refer also to the :ref:`sitemaps page<sitemap
 
 from django.db import models
 from django.core.exceptions import ValidationError
+from django import VERSION
 
 from model_utils.models import StatusModel, TimeStampedModel
 from model_utils import Choices
@@ -72,6 +73,8 @@ class MinipubModel(StatusModel, TimeStampedModel):
 
     class Meta:
         abstract = True
+        if VERSION[0] == 1 and VERSION[1] >= 10:
+            default_manager_name = 'objects'
 
     def save(self, *args, **kwargs):
         """Set the start date for non-draft items if it hasn't been set already."""
