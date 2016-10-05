@@ -65,4 +65,4 @@ Installation and usage
     :target: http://django-minipub.readthedocs.org/en/latest/?badge=latest
     :alt: Documentation Status
 Please take a look at
-`the documentation <http://django-minipub.readthedocs.org/en/latest/index.html>`_ on ReadTheDocs.
+`the documentation <http://django-minipub.readthedocs.io/en/latest/>`_ on ReadTheDocs.
