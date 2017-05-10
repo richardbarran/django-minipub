@@ -5,10 +5,6 @@ Django-minipub
     :target: https://pypi.python.org/pypi/django-minipub/
     :alt: Latest PyPI version
 
-.. image:: https://img.shields.io/pypi/dm/django-minipub.svg
-    :target: https://pypi.python.org/pypi/django-minipub/
-    :alt: Number of PyPI downloads
-
 .. image:: https://travis-ci.org/richardbarran/django-minipub.svg?branch=master
     :target: https://travis-ci.org/richardbarran/django-minipub
 
