@@ -4,7 +4,8 @@ Changelog
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Checked that app works with Django 1.11.
+- Bugfix: sitemap items are ordered by 'start' date.
 
 
 1.1 (2016-10-05)

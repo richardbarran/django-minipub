@@ -46,7 +46,7 @@ class MinipubSitemap(Sitemap):
     minipub_live = ('published',)
 
     def items(self):
-        return self.model.objects.live(statuses=self.minipub_live)
+        return self.model.objects.live(statuses=self.minipub_live).order_by('-start')
 
     def lastmod(self, obj):
         return obj.modified
