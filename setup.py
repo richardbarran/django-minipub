@@ -13,7 +13,8 @@ def get_requirements(source):
     except TypeError:
         # Older version of pip.
         install_reqs = parse_requirements(source)
-    return set([str(ir.req) for ir in install_reqs])
+    return list(set([str(ir.req) for ir in install_reqs]))
+
 
 setup(
     name='django-minipub',
@@ -37,7 +38,6 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Topic :: Internet :: WWW/HTTP',
