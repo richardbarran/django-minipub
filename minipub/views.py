@@ -25,7 +25,6 @@ from django.views.generic import DetailView
 
 
 class GetQuerysetMixin(object):
-
     minipub_live = ('published',)
 
     def get_queryset(self):
@@ -35,7 +34,7 @@ class GetQuerysetMixin(object):
         # The exception is when an article can have extra statuses - e.g. draft, published,
         # archived. In this case, we only want the show the status that is applicable to
         # this page, *plus* the draft status.
-        if self.request.user.is_authenticated() and self.request.user.is_staff:
+        if self.request.user.is_authenticated and self.request.user.is_staff:
             staff_statuses = self.minipub_live + (self.model.STATUS.draft,)
             return qs.filter(status__in=staff_statuses)
         return qs.live(statuses=self.minipub_live)

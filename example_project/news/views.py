@@ -24,7 +24,7 @@ class ArticleYearArchiveView(MinipubYearArchiveView):
         a sidebar with *all* the years that have articles."""
 
         context = super(ArticleYearArchiveView, self).get_context_data(**kwargs)
-        if self.request.user.is_authenticated() and self.request.user.is_staff:
+        if self.request.user.is_authenticated and self.request.user.is_staff:
             qs = self.model.objects.all()
         else:
             qs = self.model.objects.live()

@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.encoding import python_2_unicode_compatible
 
 from model_utils import Choices
@@ -9,7 +9,6 @@ from minipub.models import MinipubModel
 
 @python_2_unicode_compatible
 class Article(MinipubModel):
-
     STATUS = Choices('draft', 'published', 'archived')
 
     title = models.CharField(unique=True, max_length=50)

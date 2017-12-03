@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^news/', include('news.urls', namespace='news')),
     url(r'^news_with_archive/',
         include('news_with_archive.urls', namespace='news_with_archive')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^$', TemplateView.as_view(
         template_name="homepage.html"), name='homepage'),
 ]
