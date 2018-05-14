@@ -5,7 +5,7 @@ Installation & configuration
 
 Installation
 ------------
-The easiest way to install Minipub is to get the latest version from `PyPi <https://pypi.python.org/pypi>`_::
+The easiest way to install Minipub is to get the latest version from `PyPi <https://pypi.org/>`_::
 
     pip install django-minipub
 
@@ -24,7 +24,7 @@ Dependencies
 The following dependencies will be installed automatically if required:
 
 * `Django <https://www.djangoproject.com/>`_.
-* `Django-model-utils <https://pypi.python.org/pypi/django-model-utils>`_.
+* `Django-model-utils <https://pypi.org/project/django-model-utils/>`_.
 
 
 Configure Your Django Settings
