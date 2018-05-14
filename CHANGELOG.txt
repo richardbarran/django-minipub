@@ -5,6 +5,7 @@ Changelog
 ----------------
 
 - Example project never had database migrations.
+- Setup script was broken if used with version 10 of pip.
 
 
 1.3 (2017-12-03)
