@@ -78,7 +78,7 @@ Changes:
 - Do not set 'make_object_list': leave that to the end-user project.
 - Updated Bootstrap version used in example project.
 - Added more documentation.
-- Removed unecessary code.
+- Removed unnecessary code.
 
 0.3 (2014-09-19)
 ----------------
