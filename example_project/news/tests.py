@@ -27,11 +27,9 @@ be inherited easily if you're writing an app that extends this one.
 
 
 class ArticleModelTest(TestCase):
-
     """Various tests on the Article model."""
 
     def setUp(self):
-
         self.article1 = ArticleFactory(title='Some news about me')
 
     def test_status(self):
@@ -40,6 +38,8 @@ class ArticleModelTest(TestCase):
         # By default the factory publishes articles.
         self.assertQuerysetEqual(Article.objects.live().all(),
                                  ['<Article: Some news about me>'])
+        self.assertEqual(self.article1.status, Article.STATUS.published)
+        self.assertEqual(self.article1.live(), True)
 
         self.article1.status = Article.STATUS.draft
         self.article1.save()
@@ -100,11 +100,9 @@ class ArticleModelTest(TestCase):
 
 
 class ArticleListTest(TestCase):
-
     """The landing page has a list of all articles."""
 
     def setUp(self):
-
         self.article1 = ArticleFactory(title='article 1',
                                        start=datetime.date(day=23, month=12, year=2011))
         self.article2 = ArticleFactory(title='article 2',
@@ -197,12 +195,10 @@ class ArticleListTest(TestCase):
 
 
 class ArticleListYearTest(TestCase):
-
     """The landing page lists all the years for which we have articles.
     Then we can filter down the show just the articles for a given year."""
 
     def setUp(self):
-
         self.article1 = ArticleFactory(title='article 1',
                                        start=datetime.date(day=23, month=12, year=2011))
         self.article2 = ArticleFactory(title='article 2',
@@ -267,7 +263,6 @@ class ArticleListYearTest(TestCase):
 class ArticleDetailTest(TestCase):
 
     def setUp(self):
-
         self.article1 = ArticleFactory(title='Some news about me')
 
     def test_get(self):
@@ -310,7 +305,6 @@ class ArticleDetailTest(TestCase):
 class SitemapTest(TestCase):
 
     def setUp(self):
-
         self.article1 = ArticleFactory(title='Test article')
 
     def test_get(self):
