@@ -16,4 +16,5 @@ class ArticleAdmin(MinipubAdmin):
         MinipubAdmin.TIMESTAMP_FIELDSET
     )
 
+
 admin.site.register(Article, ArticleAdmin)
