@@ -9,11 +9,11 @@ Django-minipub
     :target: https://travis-ci.org/richardbarran/django-minipub
 
 .. image:: https://coveralls.io/repos/github/richardbarran/django-minipub/badge.svg?branch=master
-    :target: https://coveralls.io/github/richardbarran/django-minipub?branch=master 
+    :target: https://coveralls.io/github/richardbarran/django-minipub?branch=master
 
 Django-minipub is a **mini**-malist **pub**-lication control system for Django.
 
-Let's explain it with an example: you have a 'news' application, with an 
+Let's explain it with an example: you have a 'news' application, with an
 Article model. In the admin interface, Minipub will add this fieldset:
 
 .. image:: docs/img/minipub-fieldset.png
@@ -34,7 +34,7 @@ In addition, we have a fieldset for showing various read-only status fields:
 These can be of use for tracking changes to an Article.
 
 And that's it... Minipub is simply a few fields on a Model Mixin, together with plenty of code - in the models,
-views, admin and sitemap - to make the best use of it, that you will hopefully reuse 
+views, admin and sitemap - to make the best use of it, that you will hopefully reuse
 again and again throughout a project.
 
 What can I use it for?
@@ -47,11 +47,11 @@ Here are some examples of Minipub at work:
 
 Alternatives
 ------------
-There are several similar projects that take slightly different approaches 
+There are several similar projects that take slightly different approaches
 to publication control; usually they introduce more sophisticated control. A well-known
 example is `django-reversion <https://github.com/etianen/django-reversion>`_.
 
-Minipub is a very basic publication control tool, but works well on several production 
+Minipub is a very basic publication control tool, but works well on several production
 websites. Its author has found it be a decent compromise between a tool that's too
 basic to be useful, and too complex to be understood by its intended end users.
 
@@ -60,5 +60,6 @@ Installation and usage
 .. image:: https://readthedocs.org/projects/django-minipub/badge/?version=latest
     :target: http://django-minipub.readthedocs.org/en/latest/?badge=latest
     :alt: Documentation Status
+
 Please take a look at
 `the documentation <http://django-minipub.readthedocs.io/en/latest/>`_ on ReadTheDocs.
