@@ -23,7 +23,7 @@ class ArticleYearArchiveView(MinipubYearArchiveView):
         """Not strictly required for the demo - I just prefer for the 'year' view to show
         a sidebar with *all* the years that have articles."""
 
-        context = super(ArticleYearArchiveView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated and self.request.user.is_staff:
             qs = self.model.objects.all()
         else:

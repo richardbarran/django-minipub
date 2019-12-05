@@ -16,3 +16,6 @@ example_project/.coverage
 
 # Tox workfiles
 .tox/*
+
+# IDEs
+.idea/*

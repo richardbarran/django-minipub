@@ -4,7 +4,7 @@ Changelog
 1.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Dropped support for Python 2.
 
 
 1.5 (2019-07-01)

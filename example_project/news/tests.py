@@ -317,4 +317,4 @@ class SitemapTest(TestCase):
 
         # Has the modified date - which will always be today.
         today_as_string = datetime.date.today().today().strftime('%Y-%m-%d')
-        self.assertContains(response, '<lastmod>{0}</lastmod>'.format(today_as_string))
+        self.assertContains(response, '<lastmod>{}</lastmod>'.format(today_as_string))

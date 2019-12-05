@@ -77,10 +77,10 @@ class MinipubModel(StatusModel, TimeStampedModel):
         """Set the start date for non-draft items if it hasn't been set already."""
         if self.status != self.STATUS.draft and self.start is None:
             self.start = datetime.date.today()
-        super(MinipubModel, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def clean(self):
-        super(MinipubModel, self).clean()
+        super().clean()
         if self.start and self.end and self.start > self.end:
             raise ValidationError('The end date cannot be before the start date.')
 

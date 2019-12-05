@@ -24,11 +24,11 @@ from django.views.generic.dates import ArchiveIndexView, YearArchiveView
 from django.views.generic import DetailView
 
 
-class GetQuerysetMixin(object):
+class GetQuerysetMixin:
     minipub_live = ('published',)
 
     def get_queryset(self):
-        qs = super(GetQuerysetMixin, self).get_queryset()
+        qs = super().get_queryset()
         # Staff users are a special case - we want them to be able to see an article
         # (most) of the time, so that they can review it before it goes live.
         # The exception is when an article can have extra statuses - e.g. draft, published,
