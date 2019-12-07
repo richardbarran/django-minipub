@@ -9,6 +9,6 @@ def prereleaser_middle(data):
     print('Running unit tests.')
     subprocess.check_output(["python", "example_project/manage.py", "test", "news", "news_with_archive"])
 
-    print('Running pycodestyle check.')
+    print('Running flake8 check.')
     # See setup.cfg for configuration options.
-    subprocess.check_output(["pycodestyle"])
+    subprocess.check_output(["flake8"])

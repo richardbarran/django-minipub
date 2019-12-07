@@ -51,7 +51,6 @@ If you have defined a sitemap.xml, refer also to the :ref:`sitemaps page<sitemap
 
 from django.db import models
 from django.core.exceptions import ValidationError
-from django import VERSION
 
 from model_utils.models import StatusModel, TimeStampedModel
 from model_utils import Choices
