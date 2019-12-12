@@ -2,5 +2,5 @@
 # Note: Specifying django here crashes tox; it's autoinstalled with other packages it
 # so can be removed from this file.
 # django>=1.11
-django-model-utils>=3.2.0
+django-model-utils>=4.0.0
 
