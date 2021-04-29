@@ -1,15 +1,15 @@
-from django.conf.urls import url
+from django.urls import path
 from .views import ArticleDetailView, ArticleArchiveView, ArticleYearArchiveView
 
 app_name = 'news'
 urlpatterns = [
-    url(r'^$',
-        ArticleArchiveView.as_view(),
-        name='article_archive'),
-    url(r'^year/(?P<year>\d{4})/$',
-        ArticleYearArchiveView.as_view(),
-        name="article_year"),
-    url(r'^(?P<slug>[\w-]+)/$',
-        ArticleDetailView.as_view(),
-        name='article_detail'),
+    path('',
+         ArticleArchiveView.as_view(),
+         name='article_archive'),
+    path('year/<int:year>/',
+         ArticleYearArchiveView.as_view(),
+         name="article_year"),
+    path('<slug:slug>/',
+         ArticleDetailView.as_view(),
+         name='article_detail'),
 ]

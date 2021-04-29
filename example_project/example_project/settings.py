@@ -107,3 +107,5 @@ STATICFILES_DIRS = (
 )
 
 SITE_ID = 1
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

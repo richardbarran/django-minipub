@@ -37,7 +37,7 @@ class ArticleModelTest(TestCase):
 
         # By default the factory publishes articles.
         self.assertQuerysetEqual(Article.objects.live().all(),
-                                 ['<Article: Some news about me>'])
+                                 ['<Article: Some news about me>'], transform=repr)
         self.assertEqual(self.article1.status, Article.STATUS.published)
         self.assertEqual(self.article1.live(), True)
 
@@ -119,7 +119,8 @@ class ArticleListTest(TestCase):
 
         # Note that results are ordered by date.
         self.assertQuerysetEqual(response.context['article_list'],
-                                 ['<Article: article 2>', '<Article: article 3>', '<Article: article 1>'])
+                                 ['<Article: article 2>', '<Article: article 3>', '<Article: article 1>'],
+                                 transform=repr)
 
         self.assertContains(response, 'article 1')
         self.assertContains(response, 'article 2')
@@ -138,7 +139,7 @@ class ArticleListTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertQuerysetEqual(response.context['article_list'],
-                                 ['<Article: article 2>', '<Article: article 3>'])
+                                 ['<Article: article 2>', '<Article: article 3>'], transform=repr)
 
     def test_published_staff(self):
         """Staff members can see articles that are not published."""
@@ -156,21 +157,22 @@ class ArticleListTest(TestCase):
         response = self.client.get('/news/')
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context['article_list'],
-                                 ['<Article: article 2>', '<Article: article 3>', '<Article: article 1>'])
+                                 ['<Article: article 2>', '<Article: article 3>', '<Article: article 1>'],
+                                 transform=repr)
 
     def test_get_date_list(self):
         """Archive view has a list of years for which we have articles."""
 
         response = self.client.get('/news/')
         self.assertQuerysetEqual(response.context['date_list'],
-                                 ['datetime.date(2012, 1, 1)', 'datetime.date(2011, 1, 1)'])
+                                 ['datetime.date(2012, 1, 1)', 'datetime.date(2011, 1, 1)'], transform=repr)
 
         self.article1.status = Article.STATUS.draft
         self.article1.save()
 
         response = self.client.get('/news/')
         self.assertQuerysetEqual(response.context['date_list'],
-                                 ['datetime.date(2012, 1, 1)'])
+                                 ['datetime.date(2012, 1, 1)'], transform=repr)
 
     def test_get_date_list_staff(self):
         """Archive view has a list of years for which we have articles - staff will
@@ -191,7 +193,7 @@ class ArticleListTest(TestCase):
 
         response = self.client.get('/news/')
         self.assertQuerysetEqual(response.context['date_list'],
-                                 ['datetime.date(2012, 1, 1)', 'datetime.date(2011, 1, 1)'])
+                                 ['datetime.date(2012, 1, 1)', 'datetime.date(2011, 1, 1)'], transform=repr)
 
 
 class ArticleListYearTest(TestCase):

@@ -2,5 +2,5 @@
 # the django-minipub required packages.
 -r ../requirements.txt
 # And a few more packages.
-factory-boy>=2.4.1
+factory-boy>=3.0.0
 

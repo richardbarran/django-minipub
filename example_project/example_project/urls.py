@@ -1,4 +1,4 @@
-from django.conf.urls import include, url
+from django.urls import include, path
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.views.generic import TemplateView
@@ -9,17 +9,17 @@ from news_with_archive.sitemaps import NewsPublishedSitemap, NewsArchivedSitemap
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^news/', include('news.urls', namespace='news')),
-    url(r'^news_with_archive/',
-        include('news_with_archive.urls', namespace='news_with_archive')),
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', TemplateView.as_view(
+    path('news/', include('news.urls', namespace='news')),
+    path('news_with_archive/',
+         include('news_with_archive.urls', namespace='news_with_archive')),
+    path('admin/', admin.site.urls),
+    path('', TemplateView.as_view(
         template_name="homepage.html"), name='homepage'),
 ]
 
 urlpatterns += [
-    url(r'^sitemap\.xml$', sitemap,
-        {'sitemaps': {'news': NewsSitemap,
-                      'published': NewsPublishedSitemap,
-                      'archived': NewsArchivedSitemap}})
+    path('sitemap.xml', sitemap,
+         {'sitemaps': {'news': NewsSitemap,
+                       'published': NewsPublishedSitemap,
+                       'archived': NewsArchivedSitemap}})
 ]

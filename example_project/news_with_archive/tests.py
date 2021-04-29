@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from .factories import ArticleFactory
 from .models import Article
 
-
 """
 Tests for the `minipub_live` attribute.
 
@@ -17,7 +16,6 @@ the ArticleDetail view, so we just test that.
 
 
 class ArticleModelTest(TestCase):
-
     """Various tests on the Article model."""
 
     def test_default_start(self):
@@ -130,11 +128,9 @@ class ArticleDetailTest(TestCase):
 
 
 class ArticleListTest(TestCase):
-
     """The landing page has a list of all articles."""
 
     def setUp(self):
-
         self.article1 = ArticleFactory(title='article 1',
                                        start=datetime.date(day=23, month=12, year=2011))
         self.article2 = ArticleFactory(title='article 2',
@@ -152,14 +148,14 @@ class ArticleListTest(TestCase):
 
         # Note that results are ordered by date.
         self.assertQuerysetEqual(response.context['article_list'],
-                                 ['<Article: article 2>'])
+                                 ['<Article: article 2>'], transform=repr)
 
         # Show 'archived' articles.
         response = self.client.get('/news_with_archive/archived/')
         self.assertEqual(response.status_code, 200)
 
         self.assertQuerysetEqual(response.context['article_list'],
-                                 ['<Article: article 3>', '<Article: article 1>'])
+                                 ['<Article: article 3>', '<Article: article 1>'], transform=repr)
 
     def test_urls(self):
         """Check the urls to the detail pages."""
@@ -183,7 +179,6 @@ class ArticleListTest(TestCase):
 class SitemapTest(TestCase):
 
     def setUp(self):
-
         self.article1 = ArticleFactory(title='Test article')
 
     def test_published_articles(self):
