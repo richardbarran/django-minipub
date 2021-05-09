@@ -1,59 +1,52 @@
-<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>{% block title %}{% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- Bootstrap -->
-		<link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<link href="{{ STATIC_URL }}css/screen.css" rel="stylesheet" media="screen">
-	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	    <!--[if lt IE 9]>
-	      <script src="{{ STATIC_URL }}js/html5shiv.min.js"></script>
-	      <script src="{{ STATIC_URL }}js/respond.min.js"></script>
-	    <![endif]-->
-    </head>
-    <body>
-        <!-- Navigation -->
-		<nav class="container navbar navbar-default" role="navigation">
-		  <!-- Brand and toggle get grouped for better mobile display -->
-		  <div class="navbar-header">
-		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-		      <span class="sr-only">Toggle navigation</span>
-		      <span class="icon-bar"></span>
-		      <span class="icon-bar"></span>
-		      <span class="icon-bar"></span>
-		    </button>
-		    <a class="navbar-brand" href="/">Django-minipub example project</a>
-		  </div>
-		
-		  <!-- Collect the nav links, forms, and other content for toggling -->
-		  <div class="collapse navbar-collapse navbar-ex1-collapse">
-		    <ul class="nav navbar-nav">
-			    <li class="home"><a href="/">Home</a></li>
-			    <li class="news"><a href="{% url 'news:article_archive' %}">News</a></li>
-			    <li class="news_with_archive dropdown">
-					<a data-target="#" href="" class="dropdown-toggle" data-toggle="dropdown">
-			            News with archives<b class="caret"></b>
-			        </a>
-					<ul class="dropdown-menu">
-						<li class="sub-page"><a href="{% url 'news_with_archive:article_archive' %}">Published</a></li>
-						<li class="sub-page"><a href="{% url 'news_with_archive:article_archived_archive' %}">Archived</a></li>
-					</ul>
-				</li>
-		    </ul>
-		  </div><!-- /.navbar-collapse -->
-		</nav>
-    	<div class="container">
-		    <div class="row">
-		        <div class="col-md-12">
-		            <h1 class="page-header">{% block page_title %}{% endblock %}</h1>
-		        </div>
-		    </div>
-        	{% block content %}{% endblock %}
-        </div>
-        <script src="{{ STATIC_URL }}js/jquery.js"></script>
-        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-		<script src="{{ STATIC_URL }}js/project.js"></script>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+
+<body class="{% block page_class %}{% endblock %}">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Django-minipub demo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item nav_home">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item nav_home">
+                <a class="nav-link" href="{% url 'news:article_archive' %}">News<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav_galleries" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    News with archives
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'news_with_archive:article_archive' %}">Published</a>
+                    <a class="dropdown-item" href="{% url 'news_with_archive:article_archived_archive' %}">Archived</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div id="page_content">
+        {% block content %}{% endblock content %}
+    </div>
+
+</div> <!-- /container -->
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
 </html>
