@@ -4,7 +4,7 @@ Changelog
 1.8 (unreleased)
 ----------------
 
-- Updated example project to use Bootstrap 4.
+- Updated example project to use Bootstrap 5.
 
 
 1.7 (2021-04-29)
