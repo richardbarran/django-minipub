@@ -11,8 +11,8 @@ django_minipub.egg-info
 docs/_build/*
 
 # Coverage
-example_project/coverage_html_report
-example_project/.coverage
+htmlcov
+.coverage
 
 # Tox workfiles
 .tox/*

@@ -5,11 +5,12 @@ Django-minipub
     :target: https://pypi.python.org/pypi/django-minipub/
     :alt: Latest PyPI version
 
-.. image:: https://travis-ci.org/richardbarran/django-minipub.svg?branch=master
-    :target: https://travis-ci.org/richardbarran/django-minipub
+.. image:: https://github.com/richardbarran/django-minipub/workflows/CI/badge.svg?branch=master
+     :target: https://github.com/richardbarran/django-minipub/actions?workflow=CI
+     :alt: CI Status
 
-.. image:: https://coveralls.io/repos/github/richardbarran/django-minipub/badge.svg?branch=master
-    :target: https://coveralls.io/github/richardbarran/django-minipub?branch=master
+.. image:: https://codecov.io/github/richardbarran/django-minipub/coverage.svg?branch=master
+    :target: https://codecov.io/github/richardbarran/django-minipub?branch=master
 
 Django-minipub is a **mini**-malist **pub**-lication control system for Django.
 
