@@ -4,8 +4,9 @@ Changelog
 1.8 (unreleased)
 ----------------
 
+- Checked compatibility with Django 4.0. Dropped Python 3.5 as
+  django-model-utils not compatible with it.
 - Updated example project to use Bootstrap 5.
-
 
 1.7 (2021-04-29)
 ----------------
