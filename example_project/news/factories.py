@@ -11,6 +11,6 @@ class ArticleFactory(factory.django.DjangoModelFactory):
         model = Article
 
     # Create some dummy default values for the title (which has to be unique).
-    title = factory.Sequence(lambda n: 'article{:0>3}'.format(n))
-    slug = factory.LazyAttribute(lambda a: slugify('{}'.format(a.title)))
+    title = factory.Sequence(lambda n: f'article{n:0>3}')
+    slug = factory.LazyAttribute(lambda a: slugify(f'{a.title}'))
     status = Article.STATUS.published

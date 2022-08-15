@@ -4,7 +4,7 @@ import minipub
 
 from setuptools import setup, find_packages
 
-with open('requirements.txt', 'r') as file:
+with open('requirements.txt') as file:
     reqs = [line for line in file.readlines() if not line.strip().startswith('#')]
 
 setup(
