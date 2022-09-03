@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.8 (unreleased)
+1.8 (2022-09-03)
 ----------------
 
 - Checked compatibility with Django 4.0. Dropped Python 3.5 as
