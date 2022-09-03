@@ -7,6 +7,8 @@ Changelog
 - Checked compatibility with Django 4.0. Dropped Python 3.5 as
   django-model-utils not compatible with it.
 - Updated example project to use Bootstrap 5.
+- Checked compatibility with Django 4.1. Dropped Python 3.6 as
+  it's end-of-life.
 
 1.7 (2021-04-29)
 ----------------
