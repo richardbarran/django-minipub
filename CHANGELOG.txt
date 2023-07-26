@@ -4,7 +4,8 @@ Changelog
 1.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Checked compatibility with Django 4.2. Dropped Python 3.7 as
+  it's end-of-life.
 
 
 1.8.1 (2022-09-03)

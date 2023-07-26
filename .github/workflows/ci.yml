@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: [ 3.7, 3.8, 3.9, '3.10' ]
+        python: [ 3.7, 3.8, 3.9, '3.10', '3.11' ]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -31,12 +31,12 @@ jobs:
       - name: Run tests
         run: tox
       - name: Coverage
-        if: ${{ matrix.python == 3.9 }}
+        if: ${{ matrix.python == 3.11 }}
         run: |
           pip install coverage[toml]
           coverage run ./example_project/manage.py test example_project
       - name: Upload coverage
-        if: ${{ matrix.python == 3.9 }}
+        if: ${{ matrix.python == 3.11 }}
         uses: codecov/codecov-action@v1
         with:
           name: Python ${{ matrix.python }}
