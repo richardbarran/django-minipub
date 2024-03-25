@@ -18,7 +18,7 @@ setup(
     install_requires=reqs,
     url='https://github.com/richardbarran/django-minipub',
     author='Richard Barran',
-    author_email='richard@arbee-design.co.uk',
+    author_email='richard@arbee.design',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
