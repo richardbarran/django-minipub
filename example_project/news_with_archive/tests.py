@@ -147,14 +147,14 @@ class ArticleListTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Note that results are ordered by date.
-        self.assertQuerysetEqual(response.context['article_list'],
+        self.assertQuerySetEqual(response.context['article_list'],
                                  ['<Article: article 2>'], transform=repr)
 
         # Show 'archived' articles.
         response = self.client.get('/news_with_archive/archived/')
         self.assertEqual(response.status_code, 200)
 
-        self.assertQuerysetEqual(response.context['article_list'],
+        self.assertQuerySetEqual(response.context['article_list'],
                                  ['<Article: article 3>', '<Article: article 1>'], transform=repr)
 
     def test_urls(self):

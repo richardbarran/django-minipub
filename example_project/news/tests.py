@@ -36,14 +36,14 @@ class ArticleModelTest(TestCase):
         """Only live articles should be seen."""
 
         # By default the factory publishes articles.
-        self.assertQuerysetEqual(Article.objects.live().all(),
+        self.assertQuerySetEqual(Article.objects.live().all(),
                                  ['<Article: Some news about me>'], transform=repr)
         self.assertEqual(self.article1.status, Article.STATUS.published)
         self.assertEqual(self.article1.live(), True)
 
         self.article1.status = Article.STATUS.draft
         self.article1.save()
-        self.assertQuerysetEqual(Article.objects.live().all(),
+        self.assertQuerySetEqual(Article.objects.live().all(),
                                  [])
         self.assertEqual(self.article1.live(), False)
 
@@ -52,7 +52,7 @@ class ArticleModelTest(TestCase):
 
         self.article1.start = datetime.date(2999, 1, 1)
         self.article1.save()
-        self.assertQuerysetEqual(Article.objects.live().all(),
+        self.assertQuerySetEqual(Article.objects.live().all(),
                                  [])
         self.assertEqual(self.article1.live(), False)
 
@@ -61,7 +61,7 @@ class ArticleModelTest(TestCase):
 
         self.article1.end = datetime.date(1901, 1, 1)
         self.article1.save()
-        self.assertQuerysetEqual(Article.objects.live().all(),
+        self.assertQuerySetEqual(Article.objects.live().all(),
                                  [])
         self.assertEqual(self.article1.live(), False)
 
@@ -118,7 +118,7 @@ class ArticleListTest(TestCase):
         self.assertTemplateUsed(response, 'news/article_archive.html')
 
         # Note that results are ordered by date.
-        self.assertQuerysetEqual(response.context['article_list'],
+        self.assertQuerySetEqual(response.context['article_list'],
                                  ['<Article: article 2>', '<Article: article 3>', '<Article: article 1>'],
                                  transform=repr)
 
@@ -138,7 +138,7 @@ class ArticleListTest(TestCase):
         response = self.client.get('/news/')
         self.assertEqual(response.status_code, 200)
 
-        self.assertQuerysetEqual(response.context['article_list'],
+        self.assertQuerySetEqual(response.context['article_list'],
                                  ['<Article: article 2>', '<Article: article 3>'], transform=repr)
 
     def test_published_staff(self):
@@ -156,7 +156,7 @@ class ArticleListTest(TestCase):
 
         response = self.client.get('/news/')
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['article_list'],
+        self.assertQuerySetEqual(response.context['article_list'],
                                  ['<Article: article 2>', '<Article: article 3>', '<Article: article 1>'],
                                  transform=repr)
 
@@ -164,14 +164,14 @@ class ArticleListTest(TestCase):
         """Archive view has a list of years for which we have articles."""
 
         response = self.client.get('/news/')
-        self.assertQuerysetEqual(response.context['date_list'],
+        self.assertQuerySetEqual(response.context['date_list'],
                                  ['datetime.date(2012, 1, 1)', 'datetime.date(2011, 1, 1)'], transform=repr)
 
         self.article1.status = Article.STATUS.draft
         self.article1.save()
 
         response = self.client.get('/news/')
-        self.assertQuerysetEqual(response.context['date_list'],
+        self.assertQuerySetEqual(response.context['date_list'],
                                  ['datetime.date(2012, 1, 1)'], transform=repr)
 
     def test_get_date_list_staff(self):
@@ -192,7 +192,7 @@ class ArticleListTest(TestCase):
         self.assertTrue(self.client.login(username='john.doe', password='secret'))
 
         response = self.client.get('/news/')
-        self.assertQuerysetEqual(response.context['date_list'],
+        self.assertQuerySetEqual(response.context['date_list'],
                                  ['datetime.date(2012, 1, 1)', 'datetime.date(2011, 1, 1)'], transform=repr)
 
 
