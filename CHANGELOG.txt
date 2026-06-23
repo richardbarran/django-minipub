@@ -4,7 +4,8 @@ Changelog
 1.10 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Checked compatibility up to Django 6.0 and Python 3.14. Dropped older versions of
+Python and Django.
 
 
 1.9 (2025-05-26)
