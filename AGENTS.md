@@ -8,7 +8,7 @@ dependencies installed.
 Run the Django unit tests through the repository wrapper:
 
 ```sh
-scripts/test
+scripts/test.sh
 ```
 
 The wrapper changes into `example_project` before running:
