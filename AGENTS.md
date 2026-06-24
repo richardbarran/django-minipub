@@ -8,13 +8,13 @@ dependencies installed.
 Run the Django unit tests through the repository wrapper:
 
 ```sh
-scripts/test.sh
+scripts/test.py
 ```
 
 The wrapper changes into `example_project` before running:
 
 ```sh
-python manage.py test
+python3 manage.py test
 ```
 
 Do not run `python manage.py test` from the repository root.
