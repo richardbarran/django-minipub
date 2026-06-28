@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.10 (unreleased)
+1.10 (2026-06-28)
 -----------------
 
 - Checked compatibility up to Django 6.0 and Python 3.14. Dropped older versions of
