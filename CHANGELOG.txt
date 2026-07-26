@@ -9,6 +9,7 @@ Changelog
 - Added Django as an explicit dependency.
 - Separated runtime and development requirements.
 - Removed the setup.py compatibility shim.
+- Moved package publication to GitHub Actions workflows.
 
 
 1.10 (2026-06-28)
