@@ -4,7 +4,11 @@ Changelog
 1.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Added a pyproject.toml build-system configuration.
+- Moved package metadata to pyproject.toml.
+- Added Django as an explicit dependency.
+- Separated runtime and development requirements.
+- Removed the setup.py compatibility shim.
 
 
 1.10 (2026-06-28)
