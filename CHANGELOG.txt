@@ -10,6 +10,7 @@ Changelog
 - Separated runtime and development requirements.
 - Removed the setup.py compatibility shim.
 - Moved package publication to GitHub Actions workflows.
+- Added a reproducible, isolated release environment using uv.
 
 
 1.10 (2026-06-28)

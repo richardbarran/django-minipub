@@ -1,5 +1,28 @@
 # Agent Instructions
 
+## Preparing a Release
+
+Run releases from a clean checkout of `master`. This command creates a
+temporary, isolated environment with the release and test dependencies, installs
+the project as editable, and runs zest.releaser:
+
+```bash
+uvx --from zest.releaser \
+  --with-requirements release/requirements-release.txt \
+  --with-editable . \
+  fullrelease
+```
+
+The prerelease hook runs the release-hook and Django unit tests, checks for
+missing example-project migrations, and runs flake8. Releases default to
+local-only operations: zest.releaser does not push changes, create a GitHub
+release, or upload directly to PyPI.
+
+After the release tag has been pushed, the postrelease hook attempts to dispatch
+the trusted PyPI publication workflow through the authenticated GitHub CLI. If
+the tag has not been pushed or dispatch is unavailable, it prints a recoverable
+manual command; the completed local release remains valid.
+
 ## Updating Django and Python Compatibility
 
 Use this runbook when updating the project for supported Django and Python

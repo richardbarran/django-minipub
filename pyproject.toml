@@ -54,5 +54,13 @@ include = ["minipub*"]
 [tool.setuptools.dynamic]
 version = { attr = "minipub.__version__" }
 
+[tool.zest-releaser]
+python-file-with-version = "minipub/__init__.py"
+push-changes = false
+release = false
+upload-pypi = false
+"prereleaser.before" = ["release.releaser_hooks.prereleaser_before"]
+"postreleaser.after" = ["release.releaser_hooks.trigger_pypi_workflow"]
+
 [tool.coverage.run]
 source = ['minipub']
