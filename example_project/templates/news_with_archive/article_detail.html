@@ -9,12 +9,11 @@
         <div class="col-lg-12">
             <em>{{ article.start|default:"No start date set" }}</em>
             {% if article.staff_preview %}
-                <div class="badge badge-warning">{{ article.status|capfirst }} preview</div>
+                <div class="badge text-bg-warning">{{ article.status|capfirst }} preview</div>
             {% endif %}
             <article class="news_article">{{ article.body|safe|linebreaksbr }}</article>
             <a href="{% url 'news_with_archive:article_archive' %}" class="btn btn-primary btn-sm">View all articles</a>
         </div>
     </div>
 {% endblock content %}
-
 
