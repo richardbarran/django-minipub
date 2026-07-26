@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.11 (unreleased)
+1.11 (2026-07-26)
 -----------------
 
 - Added a pyproject.toml build-system configuration.
