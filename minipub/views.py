@@ -22,21 +22,26 @@ For example, in minipub' ``views.py``, here is the source code for defining a de
 
 from django.views.generic.dates import ArchiveIndexView, YearArchiveView
 from django.views.generic import DetailView
+from django.db.models import Q
+
+from .managers import publication_date
 
 
 class GetQuerysetMixin:
     minipub_live = ('published',)
 
+    def get_allow_future(self):
+        return self.request.user.is_staff or super().get_allow_future()
+
     def get_queryset(self):
         qs = super().get_queryset()
-        # Staff users are a special case - we want them to be able to see an article
-        # (most) of the time, so that they can review it before it goes live.
-        # The exception is when an article can have extra statuses - e.g. draft, published,
-        # archived. In this case, we only want the show the status that is applicable to
-        # this page, *plus* the draft status.
+        # Staff can preview drafts and future articles, but not expired articles
+        # or statuses belonging to a different section.
         if self.request.user.is_authenticated and self.request.user.is_staff:
             staff_statuses = self.minipub_live + (qs.model.STATUS.draft,)
-            return qs.filter(status__in=staff_statuses)
+            return qs.filter(status__in=staff_statuses).filter(
+                Q(end__gte=publication_date()) | Q(end__isnull=True)
+            )
         return qs.live(statuses=self.minipub_live)
 
 

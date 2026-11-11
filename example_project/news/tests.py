@@ -364,6 +364,65 @@ class ArticleDetailTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
+class StaffPublicationWindowTest(TestCase):
+    def setUp(self):
+        self.today = datetime.date(2026, 11, 12)
+        clock = patch('django.utils.timezone.now', return_value=datetime.datetime(
+            2026, 11, 12, 12, tzinfo=datetime.timezone.utc))
+        clock.start()
+        self.addCleanup(clock.stop)
+        self.staff = User.objects.create_user(username='editor', is_staff=True)
+
+    def test_future_articles_are_staff_previews_in_detail_and_archives(self):
+        article = ArticleFactory(start=datetime.date(2027, 1, 1))
+        self.assertTrue(article.staff_preview)
+        self.assertFalse(article.live())
+
+        self.assertEqual(self.client.get(article.get_absolute_url()).status_code, 404)
+        response = self.client.get('/news/')
+        self.assertNotContains(response, article.title)
+        self.assertEqual(self.client.get('/news/year/2027/').status_code, 404)
+
+        self.client.force_login(self.staff)
+        for url in (article.get_absolute_url(), '/news/', '/news/year/2027/'):
+            with self.subTest(url=url):
+                response = self.client.get(url)
+                self.assertEqual(response.status_code, 200)
+                self.assertContains(response, article.title)
+                self.assertContains(response, 'Published preview')
+
+    def test_expired_articles_are_hidden_even_from_staff(self):
+        for status in (Article.STATUS.draft, Article.STATUS.published):
+            article = ArticleFactory(start=datetime.date(2020, 1, 1),
+                                     end=self.today - datetime.timedelta(days=1), status=status)
+            self.assertFalse(article.staff_preview)
+            for staff in (False, True):
+                with self.subTest(status=status, staff=staff):
+                    if staff:
+                        self.client.force_login(self.staff)
+                    else:
+                        self.client.logout()
+                    self.assertEqual(self.client.get(article.get_absolute_url()).status_code, 404)
+                    response = self.client.get('/news/')
+                    self.assertNotContains(response, article.title)
+                    self.assertEqual(self.client.get('/news/year/2020/').status_code, 404)
+
+    def test_end_date_is_inclusive(self):
+        article = ArticleFactory(start=self.today, end=self.today)
+        self.assertFalse(article.staff_preview)
+        for staff in (False, True):
+            if staff:
+                self.client.force_login(self.staff)
+            self.assertEqual(self.client.get(article.get_absolute_url()).status_code, 200)
+
+    def test_year_sidebar_excludes_expired_articles(self):
+        ArticleFactory(start=datetime.date(2020, 1, 1), end=datetime.date(2020, 12, 31))
+        ArticleFactory(start=self.today)
+        self.client.force_login(self.staff)
+        response = self.client.get('/news/year/2026/')
+        self.assertEqual(list(response.context['date_list']), [datetime.date(2026, 1, 1)])
+
+
 class SitemapTest(TestCase):
 
     def setUp(self):

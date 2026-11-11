@@ -4,6 +4,8 @@ Changelog
 1.12 (unreleased)
 -----------------
 
+- Show future-dated articles in staff archive previews, label them as previews,
+  and hide expired articles from staff as well as public visitors.
 - Fixed staff previews for views configured with a queryset instead of a model.
 - Use Django's configured time zone for publication dates, independently of
   the server or an individual visitor's time zone.

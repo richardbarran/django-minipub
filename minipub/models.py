@@ -97,9 +97,8 @@ class MinipubModel(StatusModel, TimeStampedModel):
     def staff_preview(self):
         """Helper property - says if this object is being previewed by a member of staff.
 
-        Can be used when displaying objects in the website - members of staff will see all
-        objects, using this property in the template can help for attaching a message/custom
-        CSS saying that this object is being previewed.
+        Staff can preview drafts and future articles, but not expired articles.
+        Use this property in templates to label articles that are being previewed.
 
         For example, in the example_project we have this snippet:
 
@@ -111,4 +110,7 @@ class MinipubModel(StatusModel, TimeStampedModel):
 
         """
 
-        return self.status == self.STATUS.draft
+        today = publication_date()
+        if self.end and self.end < today:
+            return False
+        return self.status == self.STATUS.draft or bool(self.start and self.start > today)
