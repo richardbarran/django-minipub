@@ -6,6 +6,8 @@ Changelog
 
 - Updated the example project to Bootstrap 5.3.8 and removed its unused jQuery
   dependency.
+- Moved factory-boy to the pyproject.toml development extra and removed redundant
+  requirements files. Install development dependencies with ``pip install -e '.[dev]'``.
 
 
 1.11 (2026-07-26)

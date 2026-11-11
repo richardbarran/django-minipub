@@ -38,6 +38,11 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "factory-boy>=3.3.3",
+]
+
 [project.urls]
 Homepage = "https://github.com/richardbarran/django-minipub"
 Documentation = "https://django-minipub.readthedocs.io/"

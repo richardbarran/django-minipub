@@ -1,2 +1,0 @@
--r requirements.txt
-factory-boy>=3.3.3

@@ -9,7 +9,7 @@ the project as editable, and runs zest.releaser:
 ```bash
 uvx --from zest.releaser \
   --with-requirements release/requirements-release.txt \
-  --with-editable . \
+  --with-editable '.[dev]' \
   fullrelease
 ```
 
@@ -37,8 +37,8 @@ releases:
    project-owned deprecation warnings.
 5. Keep `tox.ini`, `pyproject.toml` classifiers, and
    `.github/workflows/ci.yml` consistent with the target matrix.
-6. Review and test dependency lower bounds across `requirements.txt`,
-   `dev-requirements.txt`, and `example_project/requirements.txt`.
+6. Review and test runtime and development dependency lower bounds in
+   `pyproject.toml`.
 7. Update the current unreleased section of `CHANGELOG.txt`, then re-run the
    complete tox matrix.
 
@@ -62,8 +62,8 @@ propose it before finalizing the pull request.
 
 ## Running Tests
 
-Before running tests, make sure the Python environment has the example project
-dependencies installed.
+Before running tests, install the project and its development dependencies from
+the repository root with `python -m pip install -e '.[dev]'`.
 
 Run the Django unit tests through the repository wrapper:
 

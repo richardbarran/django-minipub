@@ -1,3 +1,2 @@
 zest.releaser==9.9.1
 flake8==7.3.0
--r ../dev-requirements.txt

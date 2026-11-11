@@ -46,6 +46,17 @@ Here are some examples of Minipub at work:
 - `Controlling when job offers are displayed <http://www.ipglobal-ltd.com/en/about/careers/>`_.
 - `Minutes of the meetings of a residents association website <http://www.saphra.org.uk/meetings/>`_.
 
+Development
+-----------
+
+Install the project and its development dependencies from the repository root::
+
+    python -m pip install -e '.[dev]'
+
+Run the example project's tests::
+
+    scripts/test.py
+
 Alternatives
 ------------
 There are several similar projects that take slightly different approaches

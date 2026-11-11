@@ -1,2 +1,0 @@
-Django>=5.2,<6.1
-django-model-utils==5.0.0
