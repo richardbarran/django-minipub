@@ -4,6 +4,8 @@ Changelog
 1.12 (unreleased)
 -----------------
 
+- Use Django's configured time zone for publication dates, independently of
+  the server or an individual visitor's time zone.
 - Updated the example project to Bootstrap 5.3.8 and removed its unused jQuery
   dependency.
 - Moved factory-boy to the pyproject.toml development extra and removed redundant

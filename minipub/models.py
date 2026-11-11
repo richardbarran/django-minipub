@@ -55,9 +55,7 @@ from django.core.exceptions import ValidationError
 from model_utils.models import StatusModel, TimeStampedModel
 from model_utils import Choices
 
-import datetime
-
-from .managers import MinipubQuerySet
+from .managers import MinipubQuerySet, publication_date
 
 
 class MinipubModel(StatusModel, TimeStampedModel):
@@ -75,7 +73,7 @@ class MinipubModel(StatusModel, TimeStampedModel):
     def save(self, *args, **kwargs):
         """Set the start date for non-draft items if it hasn't been set already."""
         if self.status != self.STATUS.draft and self.start is None:
-            self.start = datetime.date.today()
+            self.start = publication_date()
         super().save(*args, **kwargs)
 
     def clean(self):
@@ -86,9 +84,10 @@ class MinipubModel(StatusModel, TimeStampedModel):
     def live(self, statuses=['published']):
         if self.status not in statuses:
             return False
-        if self.start and self.start > datetime.date.today():
+        today = publication_date()
+        if self.start and self.start > today:
             return False
-        if self.end and self.end < datetime.date.today():
+        if self.end and self.end < today:
             return False
         return True
 

@@ -1,11 +1,13 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from .factories import ArticleFactory
 from .models import Article
 
 import datetime
+from unittest.mock import patch
 
 """
 Welcome... here are all the tests for the minipub application.
@@ -97,6 +99,50 @@ class ArticleModelTest(TestCase):
         self.article1.save()
 
         self.assertEqual(self.article1.staff_preview, True)
+
+
+@override_settings(TIME_ZONE='Europe/Paris', USE_TZ=True)
+class PublicationDateTest(TestCase):
+    instant = datetime.datetime(2026, 11, 11, 23, 30, tzinfo=datetime.timezone.utc)
+    today = datetime.date(2026, 11, 12)
+
+    def assert_live(self, article, expected):
+        self.assertEqual(article.live(), expected)
+        self.assertEqual(Article.objects.live().filter(pk=article.pk).exists(), expected)
+
+    def test_publication_boundaries_use_site_date(self):
+        with patch('django.utils.timezone.now', return_value=self.instant):
+            starts_today = ArticleFactory(start=self.today)
+            ends_yesterday = ArticleFactory(start=self.today - datetime.timedelta(days=2),
+                                            end=self.today - datetime.timedelta(days=1))
+            ends_today = ArticleFactory(start=self.today, end=self.today)
+            starts_tomorrow = ArticleFactory(start=self.today + datetime.timedelta(days=1))
+            # A visitor is still on yesterday's date; the site's date must win.
+            for visitor_zone in ('UTC', 'America/Los_Angeles'):
+                with timezone.override(visitor_zone):
+                    self.assert_live(starts_today, True)
+                    self.assert_live(ends_yesterday, False)
+                    self.assert_live(ends_today, True)
+                    self.assert_live(starts_tomorrow, False)
+
+    def test_default_start_uses_site_date(self):
+        article = ArticleFactory(start=None, status=Article.STATUS.draft)
+        with patch('django.utils.timezone.now', return_value=self.instant), timezone.override('UTC'):
+            article.status = Article.STATUS.published
+            article.save()
+        article.refresh_from_db()
+        self.assertEqual(article.start, self.today)
+
+    @override_settings(USE_TZ=False)
+    def test_publication_without_time_zone_support(self):
+        local_now = datetime.datetime(2026, 11, 12, 0, 30)
+        with patch('django.utils.timezone.now', return_value=local_now), timezone.override('America/Los_Angeles'):
+            article = ArticleFactory(start=None)
+            self.assertEqual(article.start, self.today)
+            self.assert_live(article, True)
+            article.end = self.today - datetime.timedelta(days=1)
+            article.save()
+            self.assert_live(article, False)
 
 
 class ArticleListTest(TestCase):
