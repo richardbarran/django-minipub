@@ -1,7 +1,9 @@
-from django.test import TestCase, override_settings
+from django.test import RequestFactory, TestCase, override_settings
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.utils import timezone
+
+from minipub.views import MinipubDetailView
 
 from .factories import ArticleFactory
 from .models import Article
@@ -312,6 +314,18 @@ class ArticleDetailTest(TestCase):
 
     def setUp(self):
         self.article1 = ArticleFactory(title='Some news about me')
+
+    def test_staff_preview_with_queryset_only(self):
+        self.article1.status = Article.STATUS.draft
+        self.article1.save()
+        request = RequestFactory().get(self.article1.get_absolute_url())
+        request.user = User(is_staff=True)
+        view = MinipubDetailView.as_view(queryset=Article.objects.all())
+
+        response = view(request, slug=self.article1.slug)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context_data['object'], self.article1)
 
     def test_get(self):
         """Get an article detail page."""

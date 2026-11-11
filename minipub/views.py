@@ -35,7 +35,7 @@ class GetQuerysetMixin:
         # archived. In this case, we only want the show the status that is applicable to
         # this page, *plus* the draft status.
         if self.request.user.is_authenticated and self.request.user.is_staff:
-            staff_statuses = self.minipub_live + (self.model.STATUS.draft,)
+            staff_statuses = self.minipub_live + (qs.model.STATUS.draft,)
             return qs.filter(status__in=staff_statuses)
         return qs.live(statuses=self.minipub_live)
 

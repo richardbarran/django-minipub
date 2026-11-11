@@ -4,6 +4,7 @@ Changelog
 1.12 (unreleased)
 -----------------
 
+- Fixed staff previews for views configured with a queryset instead of a model.
 - Use Django's configured time zone for publication dates, independently of
   the server or an individual visitor's time zone.
 - Updated the example project to Bootstrap 5.3.8 and removed its unused jQuery
