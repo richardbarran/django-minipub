@@ -11,8 +11,9 @@ Example project
 Django-minipub includes an example project under ``/example_project/`` to get you quickly ready for
 contributing to the project - do not hesitate to use it!
 
-You'll probably also want to manually install
-`Sphinx <http://sphinx.pocoo.org/>`_ if you're going to update the documentation.
+Install the project and development dependencies from the repository root::
+
+    python -m pip install -e '.[dev,docs]'
 
 Coding style
 ------------
@@ -22,11 +23,10 @@ No surprises here - just try to `follow the conventions used by Django itself
 Unit tests
 ----------
 Including unit tests with your contributions will earn you bonus points, maybe even a beer. So write
-plenty of tests, and run them from the ``/example_project/`` with a
-``python manage.py test``.
+plenty of tests, and run them from the repository root with ``scripts/test.py``.
 
 There's also a `Tox <https://tox.readthedocs.io/en/latest/index.html>`_ configuration file - so if
-you have tox installed, run ``tox`` from the ``/example_project/`` folder, and it will run the entire
+you have tox installed, run ``tox`` from the repository root, and it will run the entire
 test suite against all versions of Python and Django that are supported.
 
 Documentation
@@ -35,8 +35,14 @@ Keeping the documentation up-to-date is very important - so if your code changes
 how Django-minipub works, or adds a new feature, please check that the documentation is still accurate, and
 update it if required.
 
-We use `Sphinx <http://sphinx.pocoo.org/>`_ to prepare the documentation; please refer to the excellent docs
-on that site for help.
+We use `Sphinx <https://www.sphinx-doc.org/>`_ to prepare the documentation.
+Build it from the repository root with warnings treated as errors::
+
+    python -m sphinx -E -W --keep-going -b html docs docs/_build/html
+
+The local prerelease check validates documentation; CI does not build it.
+Read the Docs publishes documentation when a release tag is pushed; see
+:doc:`releasing` for the release and recovery process.
 
 .. note::
 

@@ -14,13 +14,15 @@
 
 import sys
 import os
+from pathlib import Path
 import django
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('..'))
-sys.path.append('../example_project/')
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+sys.path.append(str(ROOT / 'example_project'))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'example_project.settings'
 django.setup()
 
@@ -37,7 +39,6 @@ extensions = [
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
 
 # The suffix of source filenames.
 source_suffix = '.rst'
@@ -62,7 +63,7 @@ sys.path.append(parent_dir)
 import minipub
 
 # The short X.Y version.
-version = '.'.join(minipub.__version__.split('.')[:1])
+version = '.'.join(minipub.__version__.split('.')[:2])
 # The full version, including alpha/beta/rc tags.
 release = minipub.__version__
 
@@ -138,7 +139,6 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied

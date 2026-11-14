@@ -69,9 +69,9 @@ basic to be useful, and too complex to be understood by its intended end users.
 
 Installation and usage
 ----------------------
-.. image:: https://readthedocs.org/projects/django-minipub/badge/?version=latest
-    :target: http://django-minipub.readthedocs.org/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/django-minipub/badge/?version=stable
+    :target: https://django-minipub.readthedocs.io/en/stable/?badge=stable
     :alt: Documentation Status
 
 Please take a look at
-`the documentation <http://django-minipub.readthedocs.io/en/latest/>`_ on ReadTheDocs.
+`the documentation <https://django-minipub.readthedocs.io/en/stable/>`_ on ReadTheDocs.

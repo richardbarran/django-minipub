@@ -13,6 +13,7 @@ Contents:
    pages/sitemaps
    pages/extra_statuses
    pages/contributing
+   pages/releasing
 
 
 Indices and tables

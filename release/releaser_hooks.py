@@ -14,6 +14,13 @@ def prereleaser_before(data):
     """Run the checks required immediately before preparing a release."""
     working_dir = data.get("workingdir", os.getcwd())
 
+    print("Building documentation (warnings are errors).")
+    subprocess.check_call(
+        [sys.executable, "-m", "sphinx", "-E", "-W", "--keep-going",
+         "-b", "html", "docs", "docs/_build/html"],
+        cwd=working_dir,
+    )
+
     print("Running unit tests.")
     subprocess.check_call([sys.executable, "scripts/test.py"], cwd=working_dir)
 

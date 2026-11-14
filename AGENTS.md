@@ -9,12 +9,13 @@ the project as editable, and runs zest.releaser:
 ```bash
 uvx --from zest.releaser \
   --with-requirements release/requirements-release.txt \
-  --with-editable '.[dev]' \
+  --with-editable '.[dev,docs]' \
   fullrelease
 ```
 
-The prerelease hook runs the release-hook and Django unit tests, checks for
-missing example-project migrations, and runs flake8. Releases default to
+The prerelease hook builds documentation with warnings treated as errors, runs
+the Django unit tests, checks for missing example-project migrations, and runs
+flake8. Releases default to
 local-only operations: zest.releaser does not push changes, create a GitHub
 release, or upload directly to PyPI.
 
@@ -22,6 +23,10 @@ After the release tag has been pushed, the postrelease hook attempts to dispatch
 the trusted PyPI publication workflow through the authenticated GitHub CLI. If
 the tag has not been pushed or dispatch is unavailable, it prints a recoverable
 manual command; the completed local release remains valid.
+
+Pushing a release tag triggers Read the Docs through its GitHub integration,
+independently of PyPI publication. See `docs/pages/releasing.rst` for tag-only
+automation setup and documentation build retries in Read the Docs.
 
 ## Updating Django and Python Compatibility
 
