@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.12 (unreleased)
+1.12 (2026-11-14)
 -----------------
 
 - Moved the test runner from scripts/test.py to bin/test.py.
