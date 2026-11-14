@@ -49,7 +49,7 @@ From the repository root::
 
     python -m pip install -e '.[dev,docs]'
     python -m sphinx -E -W --keep-going -b html docs docs/_build/html
-    scripts/test.py
+    bin/test.py
 
 Open ``docs/_build/html/index.html`` to inspect the output. Documentation builds
 initialize Django using the example project's settings; no database is needed.

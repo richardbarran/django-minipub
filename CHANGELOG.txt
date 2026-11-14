@@ -4,6 +4,7 @@ Changelog
 1.12 (unreleased)
 -----------------
 
+- Moved the test runner from scripts/test.py to bin/test.py.
 - Validate documentation before releases and configure Read the Docs to build
   release tags through its native GitHub integration.
 - Show future-dated articles in staff archive previews, label them as previews,

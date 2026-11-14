@@ -37,8 +37,8 @@ releases:
    Python versions using the official Django and Python documentation.
 2. Build the target matrix from supported combinations, excluding prereleases
    unless they were explicitly requested.
-3. Run `scripts/test.py` and `tox` before making compatibility changes.
-4. Re-run `scripts/test.py` with `PYTHONWARNINGS=default` and resolve
+3. Run `bin/test.py` and `tox` before making compatibility changes.
+4. Re-run `bin/test.py` with `PYTHONWARNINGS=default` and resolve
    project-owned deprecation warnings.
 5. Keep `tox.ini`, `pyproject.toml` classifiers, and
    `.github/workflows/ci.yml` consistent with the target matrix.
@@ -73,7 +73,7 @@ the repository root with `python -m pip install -e '.[dev]'`.
 Run the Django unit tests through the repository wrapper:
 
 ```sh
-scripts/test.py
+bin/test.py
 ```
 
 The wrapper changes into `example_project` before running:

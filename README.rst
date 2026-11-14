@@ -55,7 +55,7 @@ Install the project and its development dependencies from the repository root::
 
 Run the example project's tests::
 
-    scripts/test.py
+    bin/test.py
 
 Alternatives
 ------------

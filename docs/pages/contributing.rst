@@ -23,7 +23,7 @@ No surprises here - just try to `follow the conventions used by Django itself
 Unit tests
 ----------
 Including unit tests with your contributions will earn you bonus points, maybe even a beer. So write
-plenty of tests, and run them from the repository root with ``scripts/test.py``.
+plenty of tests, and run them from the repository root with ``bin/test.py``.
 
 There's also a `Tox <https://tox.readthedocs.io/en/latest/index.html>`_ configuration file - so if
 you have tox installed, run ``tox`` from the repository root, and it will run the entire

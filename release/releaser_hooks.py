@@ -22,7 +22,7 @@ def prereleaser_before(data):
     )
 
     print("Running unit tests.")
-    subprocess.check_call([sys.executable, "scripts/test.py"], cwd=working_dir)
+    subprocess.check_call([sys.executable, "bin/test.py"], cwd=working_dir)
 
     print("Checking that we have no outstanding DB migrations.")
     subprocess.check_call(
