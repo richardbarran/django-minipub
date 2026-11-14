@@ -43,7 +43,7 @@ dev = [
     "factory-boy>=3.3.3",
 ]
 docs = [
-    "Sphinx>=8.2,<10",
+    "Sphinx>=8.1,<10",
 ]
 
 [project.urls]
